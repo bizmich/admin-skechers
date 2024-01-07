@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
-import { Slot } from "@radix-ui/react-slot";
-import { VariantProps, cva } from "class-variance-authority";
-import React from "react";
+import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
+import { VariantProps, cva } from 'class-variance-authority';
+import React from 'react';
 
-export const textVariants = cva("text-sm font-normal");
+export const textVariants = cva('text-sm font-normal');
 export interface ParagraphProps
   extends React.ParamHTMLAttributes<HTMLParagraphElement>,
     VariantProps<typeof textVariants> {
@@ -12,12 +12,19 @@ export interface ParagraphProps
 
 const Text = React.forwardRef<HTMLParagraphElement, ParagraphProps>(
   ({ className, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "p";
+    const Comp = asChild ? Slot : 'p';
     return (
-      <Comp ref={ref} {...props} className={cn(textVariants({ className }))} />
+      <Comp
+        ref={ref}
+        {...props}
+        className={cn(
+          'leading-7 [&:not(:first-child)]:mt-6',
+          textVariants({ className })
+        )}
+      />
     );
   }
 );
 
-Text.displayName = "Text";
+Text.displayName = 'Text';
 export default Text;

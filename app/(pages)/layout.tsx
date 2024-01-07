@@ -10,7 +10,7 @@ export default async function LobbyLayout({
       <SiteAsideMenu />
       <div className='w-full'>
         <SiteHeader />
-        <main className=' relative h-full rounded-tl-2xl bg-background p-8'>
+        <main className='relative h-full overflow-y-auto rounded-tl-2xl bg-background p-8'>
           {children}
         </main>
       </div>
