@@ -52,13 +52,13 @@ const ProductFilter = () => {
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log('data:', data);
+  function onSubmit() {
+    const data: Record<string, string> = form.getValues();
 
     const newParams = new URLSearchParams(searchParams.toString());
 
     for (const key in data) {
-      if (data && data[key]) {
+      if (key && data[key]) {
         newParams.set(key, data[key]);
       } else {
         newParams.delete(data[key]);
@@ -216,7 +216,7 @@ const ProductFilter = () => {
         />
         <div className='col-span-4 text-right'>
           <Button type='submit' className=' w-auto'>
-            Submit
+            Найти
           </Button>
         </div>
       </form>
