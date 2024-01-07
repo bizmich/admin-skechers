@@ -13,17 +13,17 @@ export const siteConfig = {
       id: '2',
       icon: 'store',
       name: 'Магазин',
-      href: '#',
+
       subMenu: [
         {
           id: 'categories',
-          name: 'Category',
-          href: '/category',
+          name: 'Категории',
+          href: '/store/category',
         },
         {
           id: 'products',
           name: 'Товары',
-          href: '/products',
+          href: '/store/products',
         },
       ],
     },
@@ -31,7 +31,7 @@ export const siteConfig = {
       id: '3',
       icon: 'pages',
       name: 'Страницы',
-      href: '#',
+
       subMenu: [
         {
           id: 'brands',
@@ -79,7 +79,7 @@ export const siteConfig = {
       id: '4',
       icon: 'user',
       name: 'Администраторы',
-      href: '/administrator',
+      href: '/administrators',
     },
   ] satisfies Navigation[],
   settings: {

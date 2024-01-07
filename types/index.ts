@@ -2,7 +2,7 @@ export interface Navigation {
   id: string;
   icon: string;
   name: string;
-  href: string;
+  href?: string;
   subMenu?: NavigationSubmenu[];
 }
 
