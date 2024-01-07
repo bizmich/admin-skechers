@@ -1,15 +1,17 @@
-import axiosInstance from "@/services/axiosInstance";
-import { AuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import axiosInstance from '@/services/axiosInstance';
+import { AuthOptions } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
 
 export interface User {
-  status: number;
-  success: boolean;
-  meta: any;
-  data: Data;
+  id: string;
+  name: string;
+  phone: string;
+  active: boolean;
+  role: string;
 }
 
 export interface Data {
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
@@ -18,35 +20,35 @@ export const authConfig: AuthOptions = {
   providers: [
     Credentials({
       credentials: {
-        phone: { label: "Phone", type: "tel", required: true },
-        password: { label: "Password", type: "password", required: true },
+        username: { label: 'Username', type: 'text', required: true },
+        password: { label: 'Password', type: 'password', required: true },
       },
-      async authorize(credentials, req) {
-        if (!credentials?.phone || !credentials.password) return null;
+      async authorize(credentials) {
+        if (!credentials?.username || !credentials.password) return null;
+
         try {
           const dataFromDb = await axiosInstance
-            .post("login/", credentials)
+            .post('https://365trends.tj/api/dashboard/auth/signin', credentials)
             .then((response) => {
-              console.log("response:", response);
+              console.log('response:', response);
 
               return response;
             });
 
-          if (dataFromDb.status === 200) {
-            console.log("book", dataFromDb.data);
-
+          if (dataFromDb.status === 201) {
+            console.log('dataFromDb:', dataFromDb.data);
             return dataFromDb.data;
           } else {
             return null;
           }
         } catch (error) {
-          throw new Error("Произошла ошибка аутентификации");
+          throw new Error('Произошла ошибка аутентификации');
         }
       },
     }),
   ],
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   callbacks: {
     jwt: async ({ token, user }) => {
@@ -54,13 +56,13 @@ export const authConfig: AuthOptions = {
       return token;
     },
     session: async ({ session, token }) => {
-      session.user = token.user as User;
+      session.user = token.user as Data;
       return session;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
-  debug: process.env.NODE_ENV !== "development",
+  debug: process.env.NODE_ENV !== 'development',
 };

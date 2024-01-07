@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import type { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import type { z } from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,20 +14,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
-import { PasswordInput } from "@/components/password-input";
+import { PasswordInput } from '@/components/password-input';
 
-import { signIn } from "next-auth/react";
-import { Icons } from "../icons";
-import { authSchema } from "@/lib/validations/auth";
+import { authSchema } from '@/lib/validations/auth';
+import { signIn } from 'next-auth/react';
+import { Icons } from '../icons';
 
 type Inputs = z.infer<typeof authSchema>;
 
-export function LogInForm() {
+const LoginForm = () => {
   const router = useRouter();
-  const [error, setError] = React.useState("");
+  const [error, setError] = React.useState('');
 
   const [isPending, startTransition] = React.useTransition();
 
@@ -35,24 +35,24 @@ export function LogInForm() {
   const form = useForm<Inputs>({
     resolver: zodResolver(authSchema),
     defaultValues: {
-      phone: "",
-      password: "",
+      username: 'root',
+      password: 'strongpassword',
     },
   });
 
   function onSubmit(data: Inputs) {
     startTransition(async () => {
-      await signIn("credentials", {
-        phone: data.phone || "",
-        password: data.password || "",
+      await signIn('credentials', {
+        username: data.username || '',
+        password: data.password || '',
         redirect: false,
       }).then((response) => {
-        console.log("response:", response);
+        console.log('response:', response);
 
         if (!response?.error) {
-          router.push("/");
+          router.push('/');
         } else {
-          setError("Неправильный пароль или логин");
+          setError('Неправильный пароль или логин');
         }
       });
     });
@@ -61,17 +61,17 @@ export function LogInForm() {
   return (
     <Form {...form}>
       <form
-        className="grid gap-4"
-        onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
+        className='grid gap-4'
+        onSubmit={(...args) => form.handleSubmit(onSubmit)(...args)}
       >
         <FormField
           control={form.control}
-          name="phone"
+          name='username'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Номер пользователя</FormLabel>
+              <FormLabel>Логин</FormLabel>
               <FormControl>
-                <Input placeholder="Номер пользователя" {...field} />
+                <Input placeholder='Логин' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -79,12 +79,12 @@ export function LogInForm() {
         />
         <FormField
           control={form.control}
-          name="password"
+          name='password'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Пароль</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="**********" {...field} />
+                <PasswordInput placeholder='**********' {...field} />
               </FormControl>
               <FormMessage>{error}</FormMessage>
             </FormItem>
@@ -93,14 +93,16 @@ export function LogInForm() {
         <Button disabled={isPending}>
           {isPending && (
             <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
+              className='mr-2 h-4 w-4 animate-spin'
+              aria-hidden='true'
             />
           )}
           Вход
-          <span className="sr-only">Sign in</span>
+          <span className='sr-only'>Sign in</span>
         </Button>
       </form>
     </Form>
   );
-}
+};
+
+export default LoginForm;
