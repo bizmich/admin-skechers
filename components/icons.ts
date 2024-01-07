@@ -1,17 +1,16 @@
-import React from "react";
+import { IconKeyframes } from '@tabler/icons-react';
 import {
-  IconCash,
-  IconSettings,
   IconBellRinging,
+  IconBuildingStore,
   IconEdit,
-  IconListDetails,
-  IconUsersGroup,
-  IconHome,
-  IconUser,
-  IconUsers,
   IconEye,
   IconEyeClosed,
-} from "@tabler/icons-react";
+  IconHome,
+  IconSettings,
+  IconUser,
+  IconUsers,
+} from '@tabler/icons-react';
+import React from 'react';
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 interface IconDictionary {
@@ -22,12 +21,11 @@ export const Icons: IconDictionary = {
   home: IconHome,
   user: IconUser,
   users: IconUsers,
-  group: IconUsersGroup,
-  schedule: IconListDetails,
-  cash: IconCash,
+  store: IconBuildingStore,
   edit: IconEdit,
   notification: IconBellRinging,
   settings: IconSettings,
   eye: IconEye,
   eyeOff: IconEyeClosed,
+  pages: IconKeyframes,
 };

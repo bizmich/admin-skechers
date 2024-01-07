@@ -1,8 +1,13 @@
 export interface Navigation {
   id: string;
+  icon: string;
   name: string;
   href: string;
-  icon: string;
-  tag: string;
-  disabled: boolean;
+  subMenu?: NavigationSubmenu[];
+}
+
+interface NavigationSubmenu {
+  id: string;
+  name: string;
+  href: string;
 }
