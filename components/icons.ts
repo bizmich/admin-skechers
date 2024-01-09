@@ -9,6 +9,7 @@ import {
   IconSettings,
   IconUser,
   IconUsers,
+  IconTrash,
 } from '@tabler/icons-react';
 import React from 'react';
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -28,4 +29,5 @@ export const Icons: IconDictionary = {
   eye: IconEye,
   eyeOff: IconEyeClosed,
   pages: IconKeyframes,
+  trash: IconTrash,
 };

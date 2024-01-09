@@ -127,9 +127,9 @@ const ProductFilter = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
+                  <SelectItem value='all'>Все</SelectItem>
+                  <SelectItem value='yes'>Да</SelectItem>
+                  <SelectItem value='no'>Нет</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -148,9 +148,9 @@ const ProductFilter = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
+                  <SelectItem value='all'>Все</SelectItem>
+                  <SelectItem value='yes'>Да</SelectItem>
+                  <SelectItem value='no'>Нет</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

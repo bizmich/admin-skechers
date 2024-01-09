@@ -8,6 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import Image from 'next/image';
+import { Icons } from '../icons';
 
 const invoices = [
   {
@@ -57,29 +59,46 @@ const invoices = [
 const ProductTable = () => {
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[100px]'>Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className='text-right'>Amount</TableHead>
+          <TableHead className='w-[100px]'></TableHead>
+          <TableHead>Наименование</TableHead>
+          <TableHead>Категории</TableHead>
+          <TableHead>Бренд</TableHead>
+          <TableHead>Артикул</TableHead>
+          <TableHead>Активный</TableHead>
+          <TableHead className='text-right'>Действия</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {invoices.map((invoice) => (
           <TableRow key={invoice.invoice}>
-            <TableCell className='font-medium'>{invoice.invoice}</TableCell>
+            <TableCell className='font-medium'>
+              <Image
+                src='/card-slider-images/1.png'
+                alt='placeholder'
+                className=''
+                width={300}
+                height={300}
+              />
+            </TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className='text-right'>{invoice.totalAmount}</TableCell>
+            <TableCell>{invoice.totalAmount}</TableCell>
+            <TableCell>{invoice.totalAmount}</TableCell>
+            <TableCell>{invoice.totalAmount}</TableCell>
+            <TableCell className='text-right justify-end flex gap-2 items-center'>
+              <Icons.edit className='h-5 w-5 cursor-pointer' />
+              <Icons.trash className='h-5 w-5 cursor-pointer' />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
+      <TableFooter className='bg-white'>
         <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className='text-right'>$2,500.00</TableCell>
+          <TableCell colSpan={7} className='py-8'>
+            Pagination will be here
+          </TableCell>
         </TableRow>
       </TableFooter>
     </Table>
