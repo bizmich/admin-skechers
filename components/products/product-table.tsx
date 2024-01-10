@@ -8,14 +8,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import Image from 'next/image';
-import { Icons } from '../icons';
-import useProduct from '@/services/hooks/useProduct';
-import DeleteProductAlert from './helpers/delete-product-alert';
-import { useSearchParams } from 'next/navigation';
-import { filterFormTypes } from '@/lib/validations/product-filters-validation';
 import { getProductFilter } from '@/lib/utils';
+import useProduct from '@/services/hooks/useProduct';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { Icons } from '../icons';
 
 const ProductTable = () => {
   const params = useSearchParams();
@@ -62,7 +60,6 @@ const ProductTable = () => {
                   <Link href={`/store/products/${p.id}`}>
                     <Icons.edit className='h-5 w-5 cursor-pointer' />
                   </Link>
-                  <DeleteProductAlert id={p.id} />
                 </div>
               </TableCell>
             </TableRow>
