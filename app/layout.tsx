@@ -4,12 +4,13 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
+import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Admin',
-  description: 'Dashboard',
+  title: 'Панель управление',
+  description: 'Панель управление skechers в Душанбе.',
 };
 
 export default function RootLayout({
@@ -23,6 +24,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <body className={`${inter.className} h-screen overflow-hidden`}>
             {children}
+            <Toaster />
           </body>
         </ReactQueryProvider>
       </Providers>

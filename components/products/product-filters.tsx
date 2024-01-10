@@ -20,25 +20,14 @@ import {
 } from '../ui/select';
 import { createUrl } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-const FormSchema = z.object({
-  category: z.string().optional(),
-  brand: z.string().optional(),
-  active: z.string().optional(),
-  image: z.string().optional(),
-  technology: z.string().optional(),
-  name: z.string().optional(),
-  article: z.string().optional(),
-  id: z.string().optional(),
-});
+import { filterFormSchema } from '@/lib/validations/product-filters-validation';
 
 const ProductFilter = () => {
-  const params = useSearchParams();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm<z.infer<typeof filterFormSchema>>({
     defaultValues: {
       active: '',
       article: '',
@@ -49,7 +38,7 @@ const ProductFilter = () => {
       name: '',
       technology: '',
     },
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(filterFormSchema),
   });
 
   function onSubmit() {
@@ -58,9 +47,9 @@ const ProductFilter = () => {
     const newParams = new URLSearchParams(searchParams.toString());
 
     for (const key in data) {
-      if (key && data[key]) {
+      if (data[key]) {
         newParams.set(key, data[key]);
-      } else {
+      } else if (data[key] === 'all' || !data[key]) {
         newParams.delete(data[key]);
       }
     }
@@ -128,8 +117,8 @@ const ProductFilter = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value='all'>Все</SelectItem>
-                  <SelectItem value='yes'>Да</SelectItem>
-                  <SelectItem value='no'>Нет</SelectItem>
+                  <SelectItem value='1'>Да</SelectItem>
+                  <SelectItem value='0'>Нет</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -178,28 +167,14 @@ const ProductFilter = () => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name='name'
           render={({ field }) => (
-            <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder='Названия' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
+            <Input {...field} type='text' placeholder='Название' />
           )}
         />
-
         <FormField
           control={form.control}
           name='article'

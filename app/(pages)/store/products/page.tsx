@@ -1,21 +1,11 @@
 import {
   Container,
-  ContainerTitle,
   ContainerContent,
   ContainerFilters,
+  ContainerTitle,
 } from '@/components/pages-container';
 import ProductFilter from '@/components/products/product-filters';
 import ProductTable from '@/components/products/product-table';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 const CategoryPage = () => {
   return (

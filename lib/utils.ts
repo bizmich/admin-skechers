@@ -1,6 +1,6 @@
-import { type ClassValue, clsx } from "clsx";
-import { ReadonlyURLSearchParams } from "next/navigation";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { ReadonlyURLSearchParams } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,7 +11,19 @@ export const createUrl = (
   params: URLSearchParams | ReadonlyURLSearchParams
 ) => {
   const paramsString = params.toString();
-  const queryString = `${paramsString.length ? "?" : ""}${paramsString}`;
+  const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
 
   return `${pathname}${queryString}`;
+};
+
+export const getProductFilter = (data: any) => {
+  const queries = { ...data };
+
+  for (const key of Object.keys(queries)) {
+    if (key === 'active') {
+      queries[key] = queries[key] === '1' ? true : false;
+    }
+  }
+
+  return queries;
 };
