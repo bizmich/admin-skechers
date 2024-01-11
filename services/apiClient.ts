@@ -32,6 +32,11 @@ class APIClient {
       .post<G>('/dashboard/products', { ...form })
       .then((response) => response.data);
   };
+  getSingleProduct = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/products/${id}`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

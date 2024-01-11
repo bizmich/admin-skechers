@@ -22,8 +22,9 @@ export interface EditCategoryProps {
 const EditCategoryAlert = (props: EditCategoryProps) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
+      <AlertDialogTrigger>
         <Icons.edit className='size-5' />
+        <span className='sr-only'>Edit</span>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

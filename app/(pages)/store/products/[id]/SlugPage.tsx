@@ -21,11 +21,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { filterFormSchema } from '@/lib/validations/product-filters-validation';
+import useSingleProduct from '@/services/hooks/product-hooks/useSingleProduct';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-const SlugPage = () => {
+const SlugPage = ({ id }: { id: string }) => {
+  const { data } = useSingleProduct(id);
+
+  console.log('data:', data);
+
   const form = useForm<z.infer<typeof filterFormSchema>>({
     defaultValues: {
       active: '',

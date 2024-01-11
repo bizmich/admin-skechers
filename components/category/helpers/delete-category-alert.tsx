@@ -16,8 +16,9 @@ const DeleteCategoryAlert = ({ id }: { id: string }) => {
   const deleteCategory = useDeleteSingleCategory();
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
+      <AlertDialogTrigger>
         <Icons.trash className='size-5' />
+        <span className='sr-only'>Delete</span>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

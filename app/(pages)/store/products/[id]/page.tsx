@@ -1,11 +1,9 @@
 import SlugPage from './SlugPage';
 
-const ProductSlugPage = (req: any) => {
-  console.log('params:', req);
-
+const ProductSlugPage = ({ params }: { params: { id: string } }) => {
   return (
     <div>
-      <SlugPage />
+      <SlugPage id={params.id} />
     </div>
   );
 };

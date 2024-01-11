@@ -1,33 +1,31 @@
 import CategoryCard from '@/components/category/helpers/category-card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Category } from '@/types/category-types';
+import { Category, Menu } from '@/types/category-types';
 import CreateCategoryAlert from './helpers/create-category-alert';
 
 const CategoryTabs = ({ data }: { data: Category }) => {
-  console.log('data:', data);
-
-  const transformedObject = Object.values(data);
+  const transformedObject: Menu[] = Object.values(data).filter((el) => el.name);
 
   return (
-    <Tabs defaultValue='account' className=''>
+    <Tabs defaultValue='account' className='text-sm'>
       <TabsList>
-        <TabsTrigger value={data?.kids.id}>{data?.kids.name}</TabsTrigger>
-        <TabsTrigger value={data?.women.id}>{data?.women.name}</TabsTrigger>
-        <TabsTrigger value={data?.men.id}>{data?.men.name}</TabsTrigger>
-        <TabsTrigger value={data?.sale.id}>{data?.sale.name}</TabsTrigger>
+        {transformedObject.map((el) => {
+          return (
+            <TabsTrigger key={el.id} value={el.id}>
+              {el.name}
+            </TabsTrigger>
+          );
+        })}
+
         <CreateCategoryAlert parentId={null} />
       </TabsList>
-      <TabsContent value={data?.kids.id}>
-        {data && <CategoryCard data={data.women} />}
-      </TabsContent>
-      <TabsContent value={data?.women.id}>
-        {data && <CategoryCard data={data.women} />}
-      </TabsContent>
-      <TabsContent value={data?.men.id}>
-        {' '}
-        {data && <CategoryCard data={data.men} />}
-      </TabsContent>
-      <TabsContent value={data?.sale.id}>{data?.sale.name}</TabsContent>
+      {transformedObject.map((el) => {
+        return (
+          <TabsContent value={el.id} key={el.id}>
+            {data && <CategoryCard data={el} />}
+          </TabsContent>
+        );
+      })}
     </Tabs>
   );
 };

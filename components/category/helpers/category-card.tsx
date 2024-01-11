@@ -1,9 +1,16 @@
-import { Women } from '@/types/category-types';
+import { Menu, MenuItems } from '@/types/category-types';
+import CreateCategoryAlert from './create-category-alert';
 import DeleteCategoryAlert from './delete-category-alert';
 import EditCategoryAlert from './edit-category-alert';
-import CreateCategoryAlert from './create-category-alert';
 
-const CategoryCard = ({ data }: { data: Women }) => {
+const CategoryCard = ({ data }: { data: Menu }) => {
+  const filtered: MenuItems[] = Object.values(data).filter((el) => {
+    if (typeof el === 'object' && el !== null) {
+      return el;
+    }
+  });
+
+  if (!data) return null;
   return (
     <div className='space-y-3 w-full'>
       {/* Level 1 */}
@@ -19,79 +26,46 @@ const CategoryCard = ({ data }: { data: Women }) => {
       </div>
 
       {/* Menu */}
-      <div className='grid grid-cols-3 *:border-r *:px-5 w-full *:max-h-96 *:overflow-y-auto'>
-        {data?.clothes && (
-          <div>
-            <div className='pb-2 flex gap-2 items-center  font-semibold'>
-              {data.clothes.name}
-              <EditCategoryAlert
-                parentId={`${data.clothes.parentId}`}
-                id={data.clothes.id}
-                name={data.clothes.name}
-                tag={data.clothes.href}
-              />
-              <DeleteCategoryAlert id={data.clothes.id} />
+      <div className='grid grid-cols-3 gap-5 *:border gap-y-5 *:p-5 w-full *:max-h-96 *:overflow-y-auto'>
+        {data &&
+          filtered &&
+          filtered.map((el) => (
+            <div key={el.id}>
+              <div className='pb-2 flex gap-2 items-center font-semibold'>
+                <p className='text-base'>{el.name}</p>
+                <EditCategoryAlert
+                  parentId={`${el.parentId}`}
+                  id={el.id}
+                  name={el.name}
+                  tag={el.href}
+                />
+                <DeleteCategoryAlert id={el.id} />
+              </div>
+              <ul className='space-y-2 pl-2'>
+                {el.items.map((i) => {
+                  return (
+                    <li
+                      className='flex  justify-between items-center '
+                      key={i.name}
+                    >
+                      {i.name}
+                      <div className='flex gap-2 items-center'>
+                        <EditCategoryAlert
+                          parentId={`${i.parentId}`}
+                          id={i.id}
+                          name={i.name}
+                          tag={i.href}
+                        />
+                        <DeleteCategoryAlert id={i.id} />
+                      </div>
+                    </li>
+                  );
+                })}
+                <CreateCategoryAlert parentId={el.id} />
+              </ul>
             </div>
-            <ul className='space-y-1 list-disc'>
-              {data.clothes.items.map((el) => {
-                return (
-                  <li
-                    className='flex gap-2 justify-between items-center '
-                    key={el.name}
-                  >
-                    {el.name}
-                    <div className='flex gap-2 items-center'>
-                      <EditCategoryAlert
-                        parentId={`${el.parentId}`}
-                        id={el.id}
-                        name={el.name}
-                        tag={el.href}
-                      />
-                      <DeleteCategoryAlert id={el.id} />
-                    </div>
-                  </li>
-                );
-              })}
-              <CreateCategoryAlert parentId={data.clothes.id} />
-            </ul>
-          </div>
-        )}
-        {data?.shoes && (
-          <div>
-            <div className='pb-2 flex gap-2 items-center font-semibold '>
-              {data.shoes.name}
-              <EditCategoryAlert
-                name={data.shoes.name}
-                tag={data.shoes.href}
-                parentId={`${data.shoes.parentId}`}
-                id={data.shoes.id}
-              />
-              <DeleteCategoryAlert id={data.shoes.id} />
-            </div>
-            <div className=' space-y-1'>
-              {data.shoes.items.map((el) => {
-                return (
-                  <p
-                    className='flex gap-2 items-center justify-between'
-                    key={el.name}
-                  >
-                    {el.name}
-                    <div className='flex gap-2 items-center'>
-                      <EditCategoryAlert
-                        parentId={`${el.parentId}`}
-                        id={el.id}
-                        name={el.name}
-                        tag={el.href}
-                      />
-                      <DeleteCategoryAlert id={el.id} />
-                    </div>
-                  </p>
-                );
-              })}
-              <CreateCategoryAlert parentId={data.shoes.id} />
-            </div>
-          </div>
-        )}
+          ))}
+
         <div>
           <CreateCategoryAlert parentId={data.id} />
         </div>
