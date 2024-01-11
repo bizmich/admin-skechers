@@ -7,7 +7,7 @@ const CategoryTabs = ({ data }: { data: Category }) => {
   const transformedObject: Menu[] = Object.values(data).filter((el) => el.name);
 
   return (
-    <Tabs defaultValue='account' className='text-sm'>
+    <Tabs defaultValue={transformedObject[0].id} className='text-sm'>
       <TabsList>
         {transformedObject.map((el) => {
           return (
