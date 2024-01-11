@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import apiService from '../apiService';
+import apiService from '../../apiService';
 import { FetchResponse, Product } from '@/types';
 import { filterFormTypes } from '@/lib/validations/product-filters-validation';
 

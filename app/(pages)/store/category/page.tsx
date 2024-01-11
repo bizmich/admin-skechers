@@ -6,7 +6,7 @@ import {
   ContainerContent,
   ContainerTitle,
 } from '@/components/pages-container';
-import useCategory from '@/services/hooks/useCategory';
+import useCategory from '@/services/hooks/categories-hooks/useCategory';
 
 const CategoryPage = () => {
   const { data } = useCategory();

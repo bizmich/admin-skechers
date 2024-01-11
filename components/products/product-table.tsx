@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { getProductFilter } from '@/lib/utils';
-import useProduct from '@/services/hooks/useProduct';
+import useProduct from '@/services/hooks/product-hooks/useProduct';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';

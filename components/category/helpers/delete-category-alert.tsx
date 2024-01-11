@@ -10,8 +10,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import useDeleteSingleCategory from '@/services/hooks/categories-hooks/useDeleteSingleCategory';
 
 const DeleteCategoryAlert = ({ id }: { id: string }) => {
+  const deleteCategory = useDeleteSingleCategory();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -26,7 +28,7 @@ const DeleteCategoryAlert = ({ id }: { id: string }) => {
           <AlertDialogCancel>Отмена</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              alert(id);
+              deleteCategory.mutate(id);
             }}
           >
             Удалить

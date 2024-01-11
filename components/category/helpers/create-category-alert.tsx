@@ -10,32 +10,33 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import EditCategoryForm from './edit-category-form';
+import CreateCategoryForm from './create-category-form';
+import { Button } from '@/components/ui/button';
 
-export interface EditCategoryProps {
-  name: string;
-  tag: string;
+export interface CreateCategoryProps {
   parentId: string | null;
-  id: string;
 }
 
-const EditCategoryAlert = (props: EditCategoryProps) => {
+const CreateCategoryAlert = (props: CreateCategoryProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Icons.edit className='size-5' />
+        <Button size='sm' className='w-full' variant='outline'>
+          Добавить
+          <Icons.add className='size-5' />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Изменить</AlertDialogTitle>
           <AlertDialogDescription>
-            <EditCategoryForm {...props} />
+            <CreateCategoryForm {...props} />
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Отмена</AlertDialogCancel>
-          <AlertDialogAction type='submit' form='my-form'>
-            Изменить
+          <AlertDialogAction type='submit' form='create-category-form'>
+            Создать
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -43,4 +44,4 @@ const EditCategoryAlert = (props: EditCategoryProps) => {
   );
 };
 
-export default EditCategoryAlert;
+export default CreateCategoryAlert;

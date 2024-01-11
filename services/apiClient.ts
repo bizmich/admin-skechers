@@ -7,14 +7,29 @@ class APIClient {
       .get<G>(`/dashboard/categories`)
       .then((response) => response.data);
   };
-  getSingleCategories = async <G>(id: string) => {
+  getSingleCategory = async <G>(id: string) => {
     return await axiosInstance
       .get<G>(`/dashboard/categories/${id}`)
       .then((response) => response.data);
   };
+  updateSingleCategory = async <G>(id: string, form: any) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/categories/${id}`, { ...form })
+      .then((response) => response.data);
+  };
+  createSingleCategory = async <G>(form: any) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/categories`, { ...form })
+      .then((response) => response.data);
+  };
+  deleteSingleCategory = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/categories/${id}`)
+      .then((response) => response.data);
+  };
   getProduct = async <G>(form?: filterFormTypes) => {
     return await axiosInstance
-      .post<G>('/dashboard/products/advanced-filter', { ...form })
+      .post<G>('/dashboard/products', { ...form })
       .then((response) => response.data);
   };
 }

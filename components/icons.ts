@@ -10,6 +10,7 @@ import {
   IconUser,
   IconUsers,
   IconTrash,
+  IconPlus,
 } from '@tabler/icons-react';
 import React from 'react';
 type IconProps = React.HTMLAttributes<SVGElement>;
@@ -30,4 +31,5 @@ export const Icons: IconDictionary = {
   eyeOff: IconEyeClosed,
   pages: IconKeyframes,
   trash: IconTrash,
+  add: IconPlus,
 };
