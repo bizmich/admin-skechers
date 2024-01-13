@@ -50,4 +50,20 @@ export interface Color {
   imageUrl: string;
   price: string;
   salePrice: string;
+  active: boolean;
+  sizes: Size[];
+  galleries: Gallery[];
+}
+
+export interface Size {
+  id: string;
+  sortOrder: number;
+  value: string;
+  quantity: number;
+}
+
+export interface Gallery {
+  id: string;
+  sortOrder: number;
+  imageUrl: string;
 }

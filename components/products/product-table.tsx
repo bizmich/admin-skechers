@@ -22,13 +22,11 @@ const ProductTable = () => {
 
   const { data } = useProduct(getProductFilter(queries));
 
-  console.log('data:', data);
-
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[100px]'></TableHead>
+          <TableHead className='w-[250px]'></TableHead>
           <TableHead>Наименование</TableHead>
           <TableHead>Категории</TableHead>
           <TableHead>Бренд</TableHead>

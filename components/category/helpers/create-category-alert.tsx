@@ -28,7 +28,7 @@ const CreateCategoryAlert = (props: CreateCategoryProps) => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Изменить</AlertDialogTitle>
+          <AlertDialogTitle>Добавить</AlertDialogTitle>
           <AlertDialogDescription>
             <CreateCategoryForm {...props} />
           </AlertDialogDescription>
