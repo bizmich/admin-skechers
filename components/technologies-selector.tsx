@@ -17,6 +17,7 @@ import useCategory from '@/services/hooks/categories-hooks/useCategory';
 import { MenuItems } from '@/types/category-types';
 import { Button } from './ui/button';
 import useTechnologies from '@/services/hooks/technology-hooks/useTechnologies';
+import { ChevronDown } from 'lucide-react';
 
 interface TechnologiesSelectorProps {
   value: string[];
@@ -47,13 +48,23 @@ const TechnologiesSelector = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild className='text-sm font-medium mt-0'>
-        <Button variant='secondary'>
-          {value.length > 0
-            ? `Выбрано технологии: ${value.length}`
-            : 'Выбрать технологию'}
-        </Button>
+        <div className='relative'>
+          <Input
+            defaultValue={
+              value.length > 0
+                ? `Выбрано технологии: ${value.length}`
+                : 'Выбрать технологию'
+            }
+            readOnly
+            type='button'
+            className='cursor-pointer w-full pr-10'
+          />
+          <span className='absolute inset-y-0 px-2 right-0 flex items-center justify-center'>
+            <ChevronDown className='h-4 w-4' />
+          </span>
+        </div>
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-xl'>
+      <AlertDialogContent className=''>
         <AlertDialogHeader>
           <AlertDialogTitle>Выберите технологию</AlertDialogTitle>
         </AlertDialogHeader>

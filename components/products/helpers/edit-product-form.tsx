@@ -14,8 +14,9 @@ import { z } from 'zod';
 import useUpdateSingleProduct from '@/services/hooks/product-hooks/useUpdateSingleProduct';
 import { Product } from '@/types';
 import CategorySelector from '@/components/category-selector';
-import BrandsSelector from '@/components/brands-selector';
+
 import TechnologiesSelector from '@/components/technologies-selector';
+import { BrandsSelector } from '@/components/brands-selector';
 
 export const singleProductEditFormSchema = z.object({
   title: z.string().optional(),

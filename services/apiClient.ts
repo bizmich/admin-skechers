@@ -29,7 +29,15 @@ class APIClient {
   };
   getProduct = async <G>(form?: filterFormTypes) => {
     return await axiosInstance
-      .post<G>('/dashboard/products', { ...form })
+      .post<G>(
+        '/dashboard/products',
+        { ...form },
+        {
+          params: {
+            keyword: form?.keyword,
+          },
+        }
+      )
       .then((response) => response.data);
   };
   getSingleProduct = async <G>(id: string) => {
@@ -49,6 +57,11 @@ class APIClient {
   deleteColorImageProduct = async <G>(id: string) => {
     return await axiosInstance
       .delete<G>(`/dashboard/static/images/product-galleries/${id}`)
+      .then((response) => response.data);
+  };
+  updateColorImageProduct = async <G>(id: string) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/static/images/product-galleries/${id}`)
       .then((response) => response.data);
   };
   updateSingleProduct = async <G>(id: string, form: any) => {

@@ -20,8 +20,20 @@ export const getProductFilter = (data: any) => {
   const queries = { ...data };
 
   for (const key of Object.keys(queries)) {
-    if (key === 'active') {
-      queries[key] = queries[key] === '1' ? true : false;
+    if (queries[key]) {
+      if (key !== 'active' && queries[key]) {
+        queries[key] = queries[key].split(',');
+      }
+
+      if (key === 'active' && queries[key]) {
+        if (queries[key] === 'all') {
+          delete queries[key];
+        } else {
+          queries[key] = queries[key] === '1' ? true : false;
+        }
+      }
+    } else {
+      delete queries[key];
     }
   }
 

@@ -1,14 +1,12 @@
 import { z } from 'zod';
 
 export const filterFormSchema = z.object({
-  category: z.string().optional(),
-  brand: z.string().optional(),
+  categoryIds: z.array(z.string()).optional(),
+  brendIds: z.array(z.string()).optional(),
   active: z.string().optional(),
   image: z.string().optional(),
-  technology: z.string().optional(),
-  name: z.string().optional(),
-  article: z.string().optional(),
-  id: z.string().optional(),
+  technologyIds: z.array(z.string()).optional(),
+  keyword: z.string().optional(),
 });
 
 export type filterFormTypes = z.infer<typeof filterFormSchema>;

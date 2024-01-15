@@ -16,6 +16,7 @@ import { Label } from './ui/label';
 import useCategory from '@/services/hooks/categories-hooks/useCategory';
 import { MenuItems } from '@/types/category-types';
 import { Button } from './ui/button';
+import { ChevronDown } from 'lucide-react';
 
 interface CategorySelectorProps {
   value: string[];
@@ -45,18 +46,28 @@ const CategorySelector = ({ value, onChange }: CategorySelectorProps) => {
   };
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild className='text-sm font-medium mt-0'>
-        <Button variant='secondary'>
-          {value.length > 0
-            ? `Выбрано категория: ${value.length}`
-            : 'Выбрать категории'}
-        </Button>
+      <AlertDialogTrigger asChild className='text-sm font-medium'>
+        <div className='relative'>
+          <Input
+            defaultValue={
+              value.length > 0
+                ? `Выбрано категория: ${value.length}`
+                : 'Выбрать категории'
+            }
+            readOnly
+            type='button'
+            className='cursor-pointer w-full pr-10'
+          />
+          <span className='absolute inset-y-0 px-2 right-0 flex items-center justify-center'>
+            <ChevronDown className='h-4 w-4' />
+          </span>
+        </div>
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-6xl max-h-[80dvh] overflow-auto'>
+      <AlertDialogContent className='max-w-6xl'>
         <AlertDialogHeader>
           <AlertDialogTitle>Выберите категории</AlertDialogTitle>
         </AlertDialogHeader>
-        <div className='text-sm grid grid-cols-5 gap-3'>
+        <div className='text-sm grid grid-cols-5 gap-3 max-h-[70dvh] overflow-auto'>
           {filterCategories?.map((el) => {
             const filtered: MenuItems[] = Object.values(el).filter((f) => {
               if (typeof f === 'object' && f !== null) {

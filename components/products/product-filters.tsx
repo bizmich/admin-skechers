@@ -1,7 +1,13 @@
 'use client';
+import { createUrl } from '@/lib/utils';
+import { filterFormSchema } from '@/lib/validations/product-filters-validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import CategorySelector from '../category-selector';
+import TechnologiesSelector from '../technologies-selector';
 import { Button } from '../ui/button';
 import {
   Form,
@@ -11,6 +17,7 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
+import { BrandMultiSelect } from '../brands-selector';
 import {
   Select,
   SelectContent,
@@ -18,9 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { createUrl } from '@/lib/utils';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { filterFormSchema } from '@/lib/validations/product-filters-validation';
 
 const ProductFilter = () => {
   const router = useRouter();
@@ -30,26 +34,27 @@ const ProductFilter = () => {
   const form = useForm<z.infer<typeof filterFormSchema>>({
     defaultValues: {
       active: '',
-      article: '',
-      brand: '',
-      category: '',
-      id: '',
-      image: '',
-      name: '',
-      technology: '',
+      brendIds: [],
+      categoryIds: [],
+      keyword: '',
+      technologyIds: [],
     },
     resolver: zodResolver(filterFormSchema),
   });
 
   function onSubmit() {
-    const data: Record<string, string> = form.getValues();
+    const data: Record<string, any> = form.getValues();
 
     const newParams = new URLSearchParams(searchParams.toString());
 
     for (const key in data) {
       if (data[key]) {
-        newParams.set(key, data[key]);
-      } else if (data[key] === 'all' || !data[key]) {
+        if (Array.isArray(data[key]) && data[key].length === 0) {
+          delete data[key];
+        } else {
+          newParams.set(key, data[key]);
+        }
+      } else {
         newParams.delete(data[key]);
       }
     }
@@ -60,46 +65,50 @@ const ProductFilter = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='grid grid-cols-4 gap-5'
+        className='grid grid-cols-4 gap-3'
       >
         <FormField
           control={form.control}
-          name='category'
+          name='categoryIds'
           render={({ field }) => (
             <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder='Категории' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
+              <FormControl>
+                <CategorySelector
+                  onChange={(e) => field.onChange(e)}
+                  value={field.value || []}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name='brand'
+          name='technologyIds'
           render={({ field }) => (
             <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder='Бренды' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
+              <FormControl>
+                <TechnologiesSelector
+                  onChange={(e) => field.onChange(e)}
+                  value={field.value || []}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='brendIds'
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <BrandMultiSelect
+                  onChange={field.onChange}
+                  value={field.value || []}
+                />
+              </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
@@ -125,71 +134,31 @@ const ProductFilter = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name='image'
-          render={({ field }) => (
-            <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder='С картинками' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value='all'>Все</SelectItem>
-                  <SelectItem value='yes'>Да</SelectItem>
-                  <SelectItem value='no'>Нет</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='technology'
-          render={({ field }) => (
-            <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder='Технологии' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={form.control}
-          name='name'
+          name='keyword'
           render={({ field }) => (
-            <Input {...field} type='text' placeholder='Название' />
+            <Input
+              {...field}
+              type='text'
+              placeholder='Название, артикул, ключевое слово'
+            />
           )}
         />
-        <FormField
-          control={form.control}
-          name='article'
-          render={({ field }) => (
-            <Input {...field} type='text' placeholder='Артикул' />
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='id'
-          render={({ field }) => (
-            <Input {...field} type='text' placeholder='Внешний код' />
-          )}
-        />
-        <div className='col-span-4 text-right'>
+
+        <div className='col-span-4 text-right space-x-2'>
+          <Button
+            type='button'
+            variant='ghost'
+            onClick={() => {
+              form.reset();
+              router.push(pathname);
+            }}
+            className=' w-auto'
+          >
+            Очистить фильтр
+          </Button>
           <Button type='submit' className=' w-auto'>
             Найти
           </Button>
