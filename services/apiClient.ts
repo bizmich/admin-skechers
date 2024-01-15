@@ -57,6 +57,11 @@ class APIClient {
       })
       .then((response) => response.data);
   };
+  getProductColorGallery = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/product-galleries/${id}`)
+      .then((response) => response.data);
+  };
   deleteColorImageProduct = async <G>(id: string) => {
     return await axiosInstance
       .delete<G>(`/dashboard/static/images/product-galleries/${id}`)

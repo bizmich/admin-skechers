@@ -65,6 +65,7 @@ export interface Gallery {
   id: string;
   sortOrder: number;
   imageUrl: string;
+  mainImage: boolean;
 }
 
 export interface Brands {

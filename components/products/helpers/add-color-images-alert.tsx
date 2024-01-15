@@ -21,6 +21,7 @@ import { IconCirclePlus } from '@tabler/icons-react';
 import { ChangeEvent } from 'react';
 import { ProductColorGalleryProps } from '../product-color-gallery';
 import AddProductColorForm from './add-product-color-form';
+import useProductColorGallery from '@/services/hooks/product-hooks/useProductColorGallery';
 
 export interface ProductColorIDProps {
   id: string | null;
@@ -31,6 +32,9 @@ const AddProductAlert = (props: ProductColorIDProps) => {
   const deleteImage = useDeleteProductColorImage();
   const updateImage = useUpdateProductColorImage();
   const handleSubmit = useProductColorImage(props.id || '');
+  const { data } = useProductColorGallery(props.id || '');
+
+  console.log('data:', data);
 
   const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -53,9 +57,9 @@ const AddProductAlert = (props: ProductColorIDProps) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Добавить</AlertDialogTitle>
           <div className='flex  flex-wrap gap-3 relative mb-10'>
-            {props.images &&
-              props.images.map((image) => (
-                <div key={image.id} className='border rounded-md '>
+            {data &&
+              data.map((image) => (
+                <div key={image.id} className='border rounded-md'>
                   <div className='relative group size-32'>
                     <BlurredImage
                       image={getImageUrl.getProductImages(image.imageUrl)}
@@ -87,7 +91,7 @@ const AddProductAlert = (props: ProductColorIDProps) => {
                         }
                         defaultValue={image.sortOrder}
                       >
-                        {props.images?.map((i, idx) => (
+                        {data?.map((i, idx) => (
                           <option key={i.id + 1} value={idx + 1}>
                             {idx + 1}
                           </option>
@@ -96,6 +100,8 @@ const AddProductAlert = (props: ProductColorIDProps) => {
                     </div>
                     <div>
                       <Input
+                        name='one'
+                        defaultChecked={image.mainImage}
                         onChange={(e) =>
                           updateImage.mutate({
                             id: image.id,
@@ -103,7 +109,7 @@ const AddProductAlert = (props: ProductColorIDProps) => {
                             sortOrder: Number(e.target.value),
                           })
                         }
-                        type='checkbox'
+                        type='radio'
                         className='size-4 accent-black'
                       />
                     </div>
