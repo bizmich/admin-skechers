@@ -4,14 +4,13 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import CreateCategoryForm from './create-category-form';
 import { Button } from '@/components/ui/button';
+import CreateCategoryForm from './create-category-form';
 
 export interface CreateCategoryProps {
   parentId: string | null;
@@ -21,7 +20,7 @@ const CreateCategoryAlert = (props: CreateCategoryProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size='sm' className='w-full' variant='outline'>
+        <Button size='sm' className='w-full' variant='ghost'>
           Добавить
           <Icons.add className='size-5' />
         </Button>
@@ -29,10 +28,8 @@ const CreateCategoryAlert = (props: CreateCategoryProps) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Добавить</AlertDialogTitle>
-          <AlertDialogDescription>
-            <CreateCategoryForm {...props} />
-          </AlertDialogDescription>
         </AlertDialogHeader>
+        <CreateCategoryForm {...props} />
         <AlertDialogFooter>
           <AlertDialogCancel>Отмена</AlertDialogCancel>
           <AlertDialogAction type='submit' form='create-category-form'>

@@ -29,9 +29,7 @@ const EditCategoryAlert = (props: EditCategoryProps) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Изменить</AlertDialogTitle>
-          <AlertDialogDescription>
-            <EditCategoryForm {...props} />
-          </AlertDialogDescription>
+          <EditCategoryForm {...props} />
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Отмена</AlertDialogCancel>

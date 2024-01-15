@@ -18,7 +18,7 @@ const ProductColorTable = ({ data }: { data: Color[] }) => {
           <TableHead className='w-28'>Фото</TableHead>
           <TableHead>Цвет</TableHead>
           <TableHead>Фото (шт)</TableHead>
-
+          <TableHead className='w-52'>Размеры</TableHead>
           <TableHead className='text-right'>Действия</TableHead>
         </TableRow>
       </TableHeader>
@@ -29,8 +29,16 @@ const ProductColorTable = ({ data }: { data: Color[] }) => {
               <TableCell className='font-medium'>
                 <ProductColorGallery data={p.galleries} />
               </TableCell>
-              <TableCell className='truncate'>Черный</TableCell>
+              <TableCell className='truncate'>{p.name}</TableCell>
               <TableCell>{p.galleries.length}</TableCell>
+              <TableCell className='grid grid-cols-2'>
+                {p.sizes.map((el) => (
+                  <div key={el.id}>
+                    <span>{el.value}: </span>
+                    <span>{el.quantity} шт,</span>
+                  </div>
+                ))}
+              </TableCell>
               <TableCell className='text-right'>
                 <AddProductAlert images={p.galleries} id={p.id} />
               </TableCell>

@@ -26,7 +26,7 @@ const ProductTable = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[250px]'></TableHead>
+          <TableHead className='w-[100px]'></TableHead>
           <TableHead>Наименование</TableHead>
           <TableHead>Категории</TableHead>
           <TableHead>Бренд</TableHead>
@@ -44,15 +44,16 @@ const ProductTable = () => {
                   src='/card-slider-images/1.png'
                   alt='placeholder'
                   className=''
-                  width={300}
-                  height={300}
+                  width={100}
+                  height={100}
                 />
               </TableCell>
               <TableCell className='truncate'>{p.title}</TableCell>
               <TableCell>{p.article}</TableCell>
-              <TableCell>{p.brend.title}</TableCell>
+              <TableCell>{p.brendId}</TableCell>
               <TableCell>{p.article}</TableCell>
               <TableCell>{p.active ? 'Да' : 'Нет'}</TableCell>
+
               <TableCell className='text-right'>
                 <div className='flex gap-2 items-center justify-end'>
                   <Link href={`/store/products/${p.id}`}>

@@ -26,7 +26,7 @@ export interface Product {
   groupMySklad: string;
   typeMySklad: string;
   sortOrder: number;
-  brend: Brend;
+  brendId: string;
   title: string;
   description: string;
   newProduct: boolean;
@@ -35,12 +35,10 @@ export interface Product {
   soldQuantity: number;
   active: boolean;
   colors: Color[];
+  categoryIds: string[];
+  technologies: Technologies[];
   imageUrl: string;
-}
-
-export interface Brend {
-  id: string;
-  title: string;
+  categories: { name: string; href: string; id: string; active: boolean }[];
 }
 
 export interface Color {
@@ -53,6 +51,7 @@ export interface Color {
   active: boolean;
   sizes: Size[];
   galleries: Gallery[];
+  name: string;
 }
 
 export interface Size {
@@ -66,4 +65,20 @@ export interface Gallery {
   id: string;
   sortOrder: number;
   imageUrl: string;
+}
+
+export interface Brands {
+  active: boolean;
+  bannerUrl: null | string;
+  id: string;
+  logoUrl: null | string;
+  sortOrder: number;
+  title: string;
+}
+export interface Technologies {
+  active: boolean;
+  id: string;
+  logoUrl: null | string;
+  sortOrder: number;
+  title: string;
 }

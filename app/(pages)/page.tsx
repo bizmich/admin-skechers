@@ -1,5 +1,5 @@
-import Statistics from '@/components/statistics/statistics';
+const MainPage = () => {
+  return <div></div>;
+};
 
-export default function Home() {
-  return <div>{/* <Statistics /> */}</div>;
-}
+export default MainPage;

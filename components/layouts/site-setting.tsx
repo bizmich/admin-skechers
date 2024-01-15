@@ -10,7 +10,7 @@ const SiteSetting = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className='w-full' variant='outline'>
+        <Button className='w-full' variant='ghost'>
           <Icon className='h-5 w-5' />
           {settings.name}
         </Button>

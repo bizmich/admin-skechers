@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import apiService from '../../apiService';
+import { toast } from 'sonner';
 
 interface ImageUpload {
   id: string;
@@ -13,6 +14,15 @@ export default function useProductColorImage(id: string) {
     mutationFn: (form: FormData) => apiService.addColorImageProduct(id, form),
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries({ queryKey: ['single-product'] });
+      toast.success('Удачно', {
+        description: `Фотография добавлено`,
+      });
+    },
+    onError(error, variables, context) {
+      toast.error('Ошибка', {
+        description: `Произошла ошибка при добавление`,
+      });
+      console.log(error.message);
     },
   });
 }

@@ -51,6 +51,24 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/product-galleries/${id}`)
       .then((response) => response.data);
   };
+  updateSingleProduct = async <G>(id: string, form: any) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/products/${id}`, { ...form })
+      .then((response) => response.data);
+  };
+
+  // Brands
+  getBrands = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/brends`)
+      .then((response) => response.data);
+  };
+  // Technologies
+  getTechnologies = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/technologies`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;
