@@ -11,12 +11,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import CategorySelector from '@/components/category-selector';
 import useUpdateSingleProduct from '@/services/hooks/product-hooks/useUpdateSingleProduct';
 import { Product } from '@/types';
-import CategorySelector from '@/components/category-selector';
 
-import TechnologiesSelector from '@/components/technologies-selector';
 import { BrandsSelector } from '@/components/brands-selector';
+import TechnologiesSelector from '@/components/technologies-selector';
+import { Textarea } from '@/components/ui/textarea';
 
 export const singleProductEditFormSchema = z.object({
   title: z.string().optional(),
@@ -66,12 +67,12 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
         id='update-single-product-form'
         onSubmit={form.handleSubmit((data) => handleSubmit.mutate(data))}
       >
-        <div className='space-y-3 w-3/4'>
+        <div className='space-y-3'>
           <FormField
             control={form.control}
             name='categoryIds'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Категории:</FormLabel>
                 <FormControl>
                   <CategorySelector
@@ -87,7 +88,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
             control={form.control}
             name='technologyIds'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Технологии:</FormLabel>
                 <FormControl>
                   <TechnologiesSelector
@@ -103,7 +104,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
             control={form.control}
             name='brendId'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Бренд:</FormLabel>
                 <FormControl>
                   <BrandsSelector
@@ -120,7 +121,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
             control={form.control}
             name='title'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Название:</FormLabel>
                 <FormControl>
                   <Input {...field} type='text' placeholder='Название' />
@@ -130,25 +131,12 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name='description'
-            render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
-                <FormLabel>Описание:</FormLabel>
-                <FormControl>
-                  <Input {...field} type='text' placeholder='Описание' />
-                </FormControl>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name='active'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Активный:</FormLabel>
                 <FormControl>
                   <Input
@@ -166,7 +154,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
             control={form.control}
             name='hit'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Xит:</FormLabel>
                 <FormControl>
                   <Input
@@ -184,7 +172,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
             control={form.control}
             name='newProduct'
             render={({ field }) => (
-              <FormItem className='grid grid-cols-2 items-center'>
+              <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Новый продукт:</FormLabel>
                 <FormControl>
                   <Input
@@ -194,6 +182,20 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
                     className='size-4'
                   />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='description'
+            render={({ field }) => (
+              <FormItem className='grid grid-cols-3 items-center'>
+                <FormLabel>Описание:</FormLabel>
+                <FormControl className='col-span-2'>
+                  <Textarea {...field} placeholder='Описание' />
+                </FormControl>
+
                 <FormMessage />
               </FormItem>
             )}

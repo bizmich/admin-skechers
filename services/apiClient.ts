@@ -36,6 +36,8 @@ class APIClient {
         {
           params: {
             keyword: form?.keyword,
+            skip: form?.skip ? (Number(form?.skip) - 1) * 50 : 0,
+            take: 50,
           },
         }
       )

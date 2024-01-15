@@ -31,8 +31,10 @@ const SingleProductTable = ({ data }: { data: Partial<Product> }) => {
       <TableBody>
         {data && (
           <TableRow>
-            <TableCell className='font-medium'>{data.title}</TableCell>
-            <TableCell className='truncate'>{data.description}</TableCell>
+            <TableCell className='font-medium truncate'>{data.title}</TableCell>
+            <TableCell className='truncate max-w-10'>
+              {data.description}
+            </TableCell>
             <TableCell className='truncate'>{data.brendId}</TableCell>
             <TableCell className='truncate'>
               {data.newProduct ? 'Да' : 'Нет'}

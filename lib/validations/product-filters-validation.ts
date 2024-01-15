@@ -7,6 +7,7 @@ export const filterFormSchema = z.object({
   image: z.string().optional(),
   technologyIds: z.array(z.string()).optional(),
   keyword: z.string().optional(),
+  skip: z.string().optional(),
 });
 
 export type filterFormTypes = z.infer<typeof filterFormSchema>;

@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Icons } from '../icons';
 import { getImageUrl } from '@/services/getImagesUrl';
+import Pagination from '../Pagination';
 
 const ProductTable = () => {
   const params = useSearchParams();
@@ -69,13 +70,13 @@ const ProductTable = () => {
             </TableRow>
           ))}
       </TableBody>
-      {/* <TableFooter className='bg-white'>
+      <TableFooter className='bg-white'>
         <TableRow>
           <TableCell colSpan={7} className='py-8'>
-            Pagination will be here
+            {data && <Pagination totalPages={data?.total} />}
           </TableCell>
         </TableRow>
-      </TableFooter> */}
+      </TableFooter>
     </Table>
   );
 };
