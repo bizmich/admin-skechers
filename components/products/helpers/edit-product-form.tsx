@@ -42,8 +42,6 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
     id,
   } = data;
 
-  console.log('brendId:', brendId);
-
   const form = useForm<z.infer<typeof singleProductEditFormSchema>>({
     defaultValues: {
       title: title,
@@ -187,7 +185,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
             name='newProduct'
             render={({ field }) => (
               <FormItem className='grid grid-cols-2 items-center'>
-                <FormLabel>Новый: продукт</FormLabel>
+                <FormLabel>Новый продукт:</FormLabel>
                 <FormControl>
                   <Input
                     type='checkbox'

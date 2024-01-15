@@ -1,5 +1,6 @@
 import { filterFormTypes } from '@/lib/validations/product-filters-validation';
 import axiosInstance from './axiosInstance';
+import { UpdateProductColorImage } from './hooks/product-hooks/useUpdateProductColorImage';
 
 class APIClient {
   getCategories = async <G>() => {
@@ -59,9 +60,11 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/product-galleries/${id}`)
       .then((response) => response.data);
   };
-  updateColorImageProduct = async <G>(id: string) => {
+  updateColorImageProduct = async <G>(form: UpdateProductColorImage) => {
     return await axiosInstance
-      .patch<G>(`/dashboard/static/images/product-galleries/${id}`)
+      .patch<G>(`/dashboard/static/images/product-galleries/${form.id}`, {
+        ...form,
+      })
       .then((response) => response.data);
   };
   updateSingleProduct = async <G>(id: string, form: any) => {

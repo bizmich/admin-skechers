@@ -3,22 +3,24 @@ import { Icons } from '@/components/icons';
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
 import { getImageUrl } from '@/services/getImagesUrl';
 import useDeleteProductColorImage from '@/services/hooks/product-hooks/useDeleteProductColorImage';
+import useProductColorImage from '@/services/hooks/product-hooks/useProductColorImage';
+import useUpdateProductColorImage from '@/services/hooks/product-hooks/useUpdateProductColorImage';
+import { IconCirclePlus } from '@tabler/icons-react';
+import { ChangeEvent } from 'react';
 import { ProductColorGalleryProps } from '../product-color-gallery';
 import AddProductColorForm from './add-product-color-form';
-import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
-import useUpdateProductColorImage from '@/services/hooks/product-hooks/useUpdateProductColorImage';
 
 export interface ProductColorIDProps {
   id: string | null;
@@ -28,6 +30,16 @@ export interface ProductColorIDProps {
 const AddProductAlert = (props: ProductColorIDProps) => {
   const deleteImage = useDeleteProductColorImage();
   const updateImage = useUpdateProductColorImage();
+  const handleSubmit = useProductColorImage(props.id || '');
+
+  const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+
+    const formData = new FormData();
+    formData.append('image', event.target.files[0]);
+
+    handleSubmit.mutate(formData);
+  };
 
   const Icon = deleteImage.isPending ? Icons['spinner'] : Icons['trash'];
   return (
@@ -63,14 +75,17 @@ const AddProductAlert = (props: ProductColorIDProps) => {
                       />
                     </span>
                   </div>
-                  {/* <div className='flex w-full items-center justify-between p-1'>
+                  <div className='flex w-full items-center justify-between p-1'>
                     <div>
                       <select
-                      // onChange={(e) =>
-                      //   updateImage.mutate(image.id, {
-                      //     sortOrder: e.target.value,
-                      //   })
-                      // }
+                        onChange={(e) =>
+                          updateImage.mutate({
+                            id: image.id,
+                            mainImage: false,
+                            sortOrder: Number(e.target.value),
+                          })
+                        }
+                        defaultValue={image.sortOrder}
                       >
                         {props.images?.map((i, idx) => (
                           <option key={i.id + 1} value={idx + 1}>
@@ -80,16 +95,49 @@ const AddProductAlert = (props: ProductColorIDProps) => {
                       </select>
                     </div>
                     <div>
-                      <Input type='checkbox' className='size-4 accent-black' />
+                      <Input
+                        onChange={(e) =>
+                          updateImage.mutate({
+                            id: image.id,
+                            mainImage: e.target.checked,
+                            sortOrder: Number(e.target.value),
+                          })
+                        }
+                        type='checkbox'
+                        className='size-4 accent-black'
+                      />
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               ))}
+            <Label
+              className={buttonVariants({
+                variant: 'secondary',
+                className: 'size-32 cursor-pointer',
+              })}
+            >
+              {handleSubmit.isPending ? (
+                <Icons.spinner className='animate-spin size-5' />
+              ) : (
+                <IconCirclePlus size={35} className='fill-black text-white' />
+              )}
+              <Input
+                className='sr-only'
+                type='file'
+                accept='image/*'
+                onChange={(event) => uploadImage(event)}
+              />
+            </Label>
           </div>
           <AddProductColorForm {...props} />
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction>Готово</AlertDialogAction>
+          <AlertDialogAction>
+            {updateImage.isPending && (
+              <Icons.spinner className='animate-spin size-5' />
+            )}
+            Готово
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

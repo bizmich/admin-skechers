@@ -14,6 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Icons } from '../icons';
+import { getImageUrl } from '@/services/getImagesUrl';
 
 const ProductTable = () => {
   const params = useSearchParams();
@@ -41,7 +42,11 @@ const ProductTable = () => {
             <TableRow key={p.id}>
               <TableCell className='font-medium'>
                 <Image
-                  src='/card-slider-images/1.png'
+                  src={
+                    p.colors[0].imageUrl
+                      ? getImageUrl.getProductImages(p.colors[0].imageUrl)
+                      : '/no_image_placeholder.png'
+                  }
                   alt='placeholder'
                   className=''
                   width={100}
@@ -64,13 +69,13 @@ const ProductTable = () => {
             </TableRow>
           ))}
       </TableBody>
-      <TableFooter className='bg-white'>
+      {/* <TableFooter className='bg-white'>
         <TableRow>
           <TableCell colSpan={7} className='py-8'>
             Pagination will be here
           </TableCell>
         </TableRow>
-      </TableFooter>
+      </TableFooter> */}
     </Table>
   );
 };
