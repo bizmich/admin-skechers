@@ -14,7 +14,9 @@ export default function useUpdateProductColorImage() {
     mutationFn: (form: UpdateProductColorImage) =>
       apiService.updateColorImageProduct(form),
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries({ queryKey: ['single-product'] });
+      queryClient.invalidateQueries({
+        queryKey: ['product-color-gallery'],
+      });
     },
   });
 }

@@ -34,8 +34,6 @@ const AddProductAlert = (props: ProductColorIDProps) => {
   const handleSubmit = useProductColorImage(props.id || '');
   const { data } = useProductColorGallery(props.id || '');
 
-  console.log('data:', data);
-
   const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
 

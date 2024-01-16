@@ -19,6 +19,8 @@ const ProductColorTable = ({ data }: { data: Color[] }) => {
           <TableHead>Цвет</TableHead>
           <TableHead>Фото (шт)</TableHead>
           <TableHead className='w-52'>Размеры</TableHead>
+          <TableHead>Цена</TableHead>
+          <TableHead>Цена со скидкой</TableHead>
           <TableHead className='text-right'>Действия</TableHead>
         </TableRow>
       </TableHeader>
@@ -39,6 +41,8 @@ const ProductColorTable = ({ data }: { data: Color[] }) => {
                   </div>
                 ))}
               </TableCell>
+              <TableCell>{p.price}</TableCell>
+              <TableCell>{p.salePrice}</TableCell>
               <TableCell className='text-right'>
                 <AddProductAlert images={p.galleries} id={p.id} />
               </TableCell>

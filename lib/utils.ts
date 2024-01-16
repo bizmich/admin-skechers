@@ -21,7 +21,7 @@ export const getProductFilter = (data: any) => {
 
   for (const key of Object.keys(queries)) {
     if (queries[key]) {
-      if (key !== 'active' && queries[key]) {
+      if (key !== 'active' && key !== 'keyword' && queries[key]) {
         queries[key] = queries[key].split(',');
       }
 
