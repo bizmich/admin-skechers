@@ -45,21 +45,32 @@ const ProductFilter = () => {
   function onSubmit() {
     const data: Record<string, any> = form.getValues();
 
-    const newParams = new URLSearchParams(searchParams.toString());
+    console.log('data:', data);
 
-    for (const key in data) {
-      if (data[key]) {
-        if (Array.isArray(data[key]) && data[key].length === 0) {
-          delete data[key];
-        } else {
-          newParams.set(key, data[key]);
-        }
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    for (const [key, value] of Object.entries(data)) {
+      console.log('value:', value);
+
+      if ((Array.isArray(value) && value.length === 0) || !value) {
+        newSearchParams.delete(key);
       } else {
-        newParams.delete(data[key]);
+        newSearchParams.set(key, String(value));
       }
     }
 
-    router.push(createUrl(pathname, newParams), { scroll: false });
+    // for (const key in data) {
+    //   if (data[key]) {
+    //     if (Array.isArray(data[key]) && data[key].length === 0) {
+    //       delete data[key];
+    //     } else {
+    //       newParams.set(key, data[key]);
+    //     }
+    //   } else {
+    //     newParams.delete(data[key]);
+    //   }
+    // }
+
+    router.push(createUrl(pathname, newSearchParams), { scroll: false });
   }
   return (
     <Form {...form}>

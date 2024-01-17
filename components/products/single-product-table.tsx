@@ -1,73 +1,52 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { Product } from '@/types';
+import { SingleProduct } from '@/types';
 import EditProductAlert from './helpers/edit-product-alert';
 
-const SingleProductTable = ({ data }: { data: Partial<Product> }) => {
-  console.log('data:', data);
-
+const SingleProductTable = ({ data }: { data: SingleProduct }) => {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Название</TableHead>
-          <TableHead>Описание</TableHead>
-          <TableHead>Бренд</TableHead>
-          <TableHead>Новый продукт</TableHead>
-          <TableHead>Xит</TableHead>
-          <TableHead>Активный</TableHead>
-          <TableHead>Категории</TableHead>
-          <TableHead>Технологии</TableHead>
-          <TableHead>Цвета</TableHead>
-          <TableHead className='text-right'>Действия</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data && (
-          <TableRow>
-            <TableCell className='font-medium truncate'>{data.title}</TableCell>
-            <TableCell className='truncate max-w-10'>
-              {data.description}
-            </TableCell>
-            <TableCell className='truncate'>{data.brendId}</TableCell>
-            <TableCell className='truncate'>
-              {data.newProduct ? 'Да' : 'Нет'}
-            </TableCell>
-            <TableCell className='truncate'>
-              {' '}
-              {data.hit ? 'Да' : 'Нет'}
-            </TableCell>
-            <TableCell className='truncate'>
-              {' '}
-              {data.active ? 'Да' : 'Нет'}
-            </TableCell>
-            <TableCell className='truncate flex flex-col'>
-              {data.categories?.map((cat) => (
-                <span key={cat.id}>{cat.name}</span>
-              ))}
-            </TableCell>
-            <TableCell>
-              <div className='flex flex-col'>
-                {data.technologies?.map((tech) => (
-                  <div key={tech.id}>{tech.title}</div>
-                ))}
-              </div>
-            </TableCell>
-            <TableCell className='truncate'>{data.colors?.length}</TableCell>
+    <div className='grid grid-cols-3 max-w-4xl '>
+      <div className='space-y-3 divide-y'>
+        <div>Название</div>
+        <div>Описание</div>
+        <div>Бренд</div>
+        <div>Новый продукт</div>
+        <div>Xит</div>
+        <div>Активный</div>
+        <div>Категории</div>
+        <div>Технологии</div>
+        <div>Цвета</div>
+        <div>Артикул</div>
+      </div>
 
-            <TableCell className='text-right'>
-              <EditProductAlert {...data} />
-            </TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+      {data && (
+        <div className='space-y-3 divide-y'>
+          <div className='font-medium '>{data.title}</div>
+          <div className='truncate'>{data.description}</div>
+          <div className='truncate'>{data.brendId}</div>
+          <div className='truncate'>{data.newProduct ? 'Да' : 'Нет'}</div>
+          <div className='truncate'> {data.hit ? 'Да' : 'Нет'}</div>
+          <div className='truncate'> {data.active ? 'Да' : 'Нет'}</div>
+          <div className='truncate flex flex-col'>
+            {data.categories?.map((cat) => (
+              <span key={cat.id}>{cat.name}</span>
+            ))}
+            {data.categories?.length === 0 && 'Не указаны'}
+          </div>
+          <div>
+            <div className='flex flex-col'>
+              {data.technologies?.map((tech) => (
+                <div key={tech.id}>{tech.title}</div>
+              ))}
+              {data.technologies?.length === 0 && 'Не указаны'}
+            </div>
+          </div>
+          <div className='truncate'>{data.colors?.length}</div>
+          <div className='truncate'>{data.article}</div>
+        </div>
+      )}
+      <div>
+        <EditProductAlert {...data} />
+      </div>
+    </div>
   );
 };
 

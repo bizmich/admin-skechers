@@ -1,6 +1,7 @@
 import { filterFormTypes } from '@/lib/validations/product-filters-validation';
 import axiosInstance from './axiosInstance';
 import { UpdateProductColorImage } from './hooks/product-hooks/useUpdateProductColorImage';
+import { AxiosInterceptorOptions, AxiosRequestConfig } from 'axios';
 
 class APIClient {
   getCategories = async <G>() => {
@@ -28,19 +29,12 @@ class APIClient {
       .delete<G>(`/dashboard/categories/${id}`)
       .then((response) => response.data);
   };
-  getProduct = async <G>(form?: filterFormTypes) => {
+  getProduct = async <G>(
+    form?: filterFormTypes,
+    params?: AxiosRequestConfig
+  ) => {
     return await axiosInstance
-      .post<G>(
-        '/dashboard/products',
-        { ...form },
-        {
-          params: {
-            keyword: form?.keyword,
-            skip: form?.skip ? (Number(form?.skip) - 1) * 50 : 0,
-            take: 50,
-          },
-        }
-      )
+      .post<G>('/dashboard/products', { ...form }, params)
       .then((response) => response.data);
   };
   getSingleProduct = async <G>(id: string) => {

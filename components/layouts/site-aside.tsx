@@ -1,21 +1,20 @@
-import { siteConfig } from '@/config/site';
-import Logo from '../Logo';
-import Link from 'next/link';
-import { Icons } from '../icons';
-import SiteSetting from './site-setting';
-import { Button } from '../ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import Logo from '../Logo';
+import { Icons } from '../icons';
+import SiteSetting from './site-setting';
 
 const SiteAsideMenu = () => {
   const { navigation } = siteConfig;
   return (
-    <aside className='w-[15%] px-5'>
+    <aside className='w-64 px-5'>
       <div className='flex items-center justify-center py-5'>
         <Logo />
       </div>

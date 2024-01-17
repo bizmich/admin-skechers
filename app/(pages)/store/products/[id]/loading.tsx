@@ -1,5 +1,6 @@
+import LoadingOverlay from '@/components/loading-overlay';
 import React from 'react';
 
-export default function LoadingPage() {
-  return <div>Loading </div>;
+export default function Loading() {
+  return <LoadingOverlay visible={true} />;
 }

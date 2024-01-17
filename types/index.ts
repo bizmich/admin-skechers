@@ -1,6 +1,8 @@
+import { Icons } from '@/components/icons';
+
 export interface Navigation {
   id: string;
-  icon: string;
+  icon: keyof typeof Icons;
   name: string;
   href?: string;
   subMenu?: NavigationSubmenu[];
@@ -26,7 +28,7 @@ export interface Product {
   groupMySklad: string;
   typeMySklad: string;
   sortOrder: number;
-  brendId: string;
+  brend: { title: string; id: string };
   title: string;
   description: string;
   newProduct: boolean;
@@ -82,4 +84,8 @@ export interface Technologies {
   logoUrl: null | string;
   sortOrder: number;
   title: string;
+}
+
+export interface SingleProduct extends Product {
+  brendId: string;
 }
