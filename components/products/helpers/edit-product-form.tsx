@@ -13,7 +13,7 @@ import { z } from 'zod';
 
 import CategorySelector from '@/components/category-selector';
 import useUpdateSingleProduct from '@/services/hooks/product-hooks/useUpdateSingleProduct';
-import { Product } from '@/types';
+import { Product, SingleProduct } from '@/types';
 
 import { BrandsSelector } from '@/components/brands-selector';
 import TechnologiesSelector from '@/components/technologies-selector';
@@ -30,7 +30,7 @@ export const singleProductEditFormSchema = z.object({
   technologyIds: z.array(z.string()).optional(),
 });
 
-const EditSingleProductForm = ({ data }: { data: Partial<Product> }) => {
+const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
   const {
     title,
     active,
