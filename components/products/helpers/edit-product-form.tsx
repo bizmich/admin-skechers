@@ -57,7 +57,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
     resolver: zodResolver(singleProductEditFormSchema),
   });
 
-  console.log('form:', form.getValues());
+  
 
   const handleSubmit = useUpdateSingleProduct(id || '');
 

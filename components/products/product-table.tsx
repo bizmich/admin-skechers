@@ -36,7 +36,7 @@ const ProductTable = () => {
 
   const createQueryString = useCallback(
     (params: Record<string, string | number | null>) => {
-      const newSearchParams = new URLSearchParams();
+      const newSearchParams = new URLSearchParams(searchParams?.toString());
 
       for (const [key, value] of Object.entries(params)) {
         if (value === null) {
@@ -48,7 +48,7 @@ const ProductTable = () => {
 
       return newSearchParams.toString();
     },
-    []
+    [searchParams]
   );
 
   return (
@@ -84,7 +84,7 @@ const ProductTable = () => {
                   />
                 </TableCell>
                 <TableCell className='truncate'>{p.title}</TableCell>
-                <TableCell>{p.article}</TableCell>
+                <TableCell>{p.}</TableCell>
                 <TableCell>{p.brend.title}</TableCell>
                 <TableCell>{p.article}</TableCell>
                 <TableCell>{p.active ? 'Да' : 'Нет'}</TableCell>
