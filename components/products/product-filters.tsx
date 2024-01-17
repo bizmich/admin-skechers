@@ -126,7 +126,7 @@ const ProductFilter = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value=' '>Все</SelectItem>
+                  <SelectItem value='all'>Все</SelectItem>
                   <SelectItem value='1'>Да</SelectItem>
                   <SelectItem value='0'>Нет</SelectItem>
                 </SelectContent>
