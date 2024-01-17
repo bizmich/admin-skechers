@@ -33,7 +33,7 @@ const ProductFilter = () => {
 
   const form = useForm<z.infer<typeof filterFormSchema>>({
     defaultValues: {
-      active: '',
+      active: 'all' ?? '',
       brendIds: [],
       categoryIds: [],
       keyword: '',
@@ -42,33 +42,19 @@ const ProductFilter = () => {
     resolver: zodResolver(filterFormSchema),
   });
 
+  console.log('form:', form.getValues());
+
   function onSubmit() {
     const data: Record<string, any> = form.getValues();
 
-    console.log('data:', data);
-
     const newSearchParams = new URLSearchParams(searchParams.toString());
     for (const [key, value] of Object.entries(data)) {
-      console.log('value:', value);
-
       if ((Array.isArray(value) && value.length === 0) || !value) {
         newSearchParams.delete(key);
       } else {
         newSearchParams.set(key, String(value));
       }
     }
-
-    // for (const key in data) {
-    //   if (data[key]) {
-    //     if (Array.isArray(data[key]) && data[key].length === 0) {
-    //       delete data[key];
-    //     } else {
-    //       newParams.set(key, data[key]);
-    //     }
-    //   } else {
-    //     newParams.delete(data[key]);
-    //   }
-    // }
 
     router.push(createUrl(pathname, newSearchParams), { scroll: false });
   }
@@ -129,14 +115,18 @@ const ProductFilter = () => {
           name='active'
           render={({ field }) => (
             <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={'all'}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder='Активные' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value='all'>Все</SelectItem>
+                  <SelectItem value=' '>Все</SelectItem>
                   <SelectItem value='1'>Да</SelectItem>
                   <SelectItem value='0'>Нет</SelectItem>
                 </SelectContent>

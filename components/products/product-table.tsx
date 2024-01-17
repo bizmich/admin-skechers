@@ -9,15 +9,14 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { getProductFilter } from '@/lib/utils';
+import { getImageUrl } from '@/services/getImagesUrl';
 import useProduct from '@/services/hooks/product-hooks/useProduct';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Icons } from '../icons';
-import { getImageUrl } from '@/services/getImagesUrl';
-import Pagination from '../Pagination';
 import { useCallback } from 'react';
-import NoFound from '../no-found';
+import Pagination from '../Pagination';
+import { Icons } from '../icons';
 import LoadingOverlay from '../loading-overlay';
 
 const ProductTable = () => {
@@ -84,7 +83,7 @@ const ProductTable = () => {
                   />
                 </TableCell>
                 <TableCell className='truncate'>{p.title}</TableCell>
-                <TableCell>{p.}</TableCell>
+                <TableCell>{p.article}</TableCell>
                 <TableCell>{p.brend.title}</TableCell>
                 <TableCell>{p.article}</TableCell>
                 <TableCell>{p.active ? 'Да' : 'Нет'}</TableCell>
