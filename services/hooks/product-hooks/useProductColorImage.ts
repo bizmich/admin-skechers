@@ -14,6 +14,7 @@ export default function useProductColorImage(id: string) {
     mutationFn: (form: FormData) => apiService.addColorImageProduct(id, form),
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries({ queryKey: ['product-color-gallery'] });
+      queryClient.invalidateQueries({ queryKey: ['single-product'] });
       toast.success('Удачно', {
         description: `Фотография добавлено`,
       });

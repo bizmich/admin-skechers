@@ -6,8 +6,11 @@ export default function useDeleteProductColorImage() {
 
   return useMutation({
     mutationFn: (id: string) => apiService.deleteColorImageProduct(id),
-    onSuccess(data, variables, context) {
+    onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['single-product'] });
+      queryClient.invalidateQueries({
+        queryKey: ['product-color-gallery'],
+      });
     },
   });
 }

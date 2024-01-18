@@ -4,6 +4,7 @@ import {
   ContainerContent,
   ContainerTitle,
 } from '@/components/pages-container';
+import EditProductAlert from '@/components/products/helpers/edit-product-alert';
 import ProductColorTable from '@/components/products/product-color-table';
 import SingleProductTable from '@/components/products/single-product-table';
 
@@ -14,7 +15,12 @@ const SlugPage = ({ id }: { id: string }) => {
 
   return (
     <Container>
-      <ContainerTitle>Изменить товар</ContainerTitle>
+      <ContainerTitle className='flex items-center gap-2'>
+        Изменить товар
+        <div>
+          <EditProductAlert {...data} />
+        </div>
+      </ContainerTitle>
       <ContainerContent className='w-full'>
         <div className='space-y-5'>
           <div>{data && <SingleProductTable data={data} />}</div>
