@@ -2,6 +2,7 @@ import { filterFormTypes } from '@/lib/validations/product-filters-validation';
 import axiosInstance from './axiosInstance';
 import { UpdateProductColorImage } from './hooks/product-hooks/useUpdateProductColorImage';
 import { AxiosInterceptorOptions, AxiosRequestConfig } from 'axios';
+import { ColorActive } from './hooks/product-hooks/useToggleColorActive';
 
 class APIClient {
   getCategories = async <G>() => {
@@ -42,6 +43,12 @@ class APIClient {
       .get<G>(`/dashboard/products/${id}`)
       .then((response) => response.data);
   };
+
+  toggleProductColorActive = async <G>(form: ColorActive) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/product-colors/${form.id}`, { active: form.active })
+      .then((response) => response.data);
+  };
   addColorImageProduct = async <G>(id: string, form: FormData) => {
     return await axiosInstance
       .post<G>(`/dashboard/static/images/product-galleries/${id}`, form, {
@@ -80,6 +87,12 @@ class APIClient {
       .get<G>(`/dashboard/brends`)
       .then((response) => response.data);
   };
+  deleteBrand = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/brends/${id}`)
+      .then((response) => response.data);
+  };
+
   // Technologies
   getTechnologies = async <G>() => {
     return await axiosInstance

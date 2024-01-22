@@ -57,8 +57,6 @@ const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
     resolver: zodResolver(singleProductEditFormSchema),
   });
 
-  
-
   const handleSubmit = useUpdateSingleProduct(id || '');
 
   return (
@@ -193,7 +191,11 @@ const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
               <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Описание:</FormLabel>
                 <FormControl className='col-span-2'>
-                  <Textarea {...field} placeholder='Описание' />
+                  <Textarea
+                    {...field}
+                    placeholder='Описание'
+                    className='whitespace-pre'
+                  />
                 </FormControl>
 
                 <FormMessage />

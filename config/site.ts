@@ -39,14 +39,14 @@ export const siteConfig = {
           href: '/brands',
         },
         {
-          id: 'modern-technologies',
+          id: 'technologies',
           name: 'Современные технологии',
-          href: '/modern-technologies',
+          href: '/technologies',
         },
         {
-          id: 'our-technologies',
+          id: 'offers',
           name: 'Наши предложение',
-          href: '/our-technologies',
+          href: '/offers',
         },
         {
           id: 'orders',

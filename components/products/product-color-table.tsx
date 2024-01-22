@@ -9,8 +9,11 @@ import {
 } from '@/components/ui/table';
 import { Color } from '@/types';
 import ProductColorGallery from './product-color-gallery';
+import useToggleColorActive from '@/services/hooks/product-hooks/useToggleColorActive';
+import { Switch } from '../ui/switch';
 
 const ProductColorTable = ({ data }: { data: Color[] }) => {
+  const toggleActive = useToggleColorActive();
   return (
     <Table>
       <TableHeader>
@@ -21,6 +24,7 @@ const ProductColorTable = ({ data }: { data: Color[] }) => {
           <TableHead className='w-52'>Размеры</TableHead>
           <TableHead>Цена</TableHead>
           <TableHead>Цена со скидкой</TableHead>
+          <TableHead>Активный</TableHead>
           <TableHead className='text-right'>Действия</TableHead>
         </TableRow>
       </TableHeader>
@@ -43,6 +47,15 @@ const ProductColorTable = ({ data }: { data: Color[] }) => {
               </TableCell>
               <TableCell>{p.price}</TableCell>
               <TableCell>{p.salePrice}</TableCell>
+              <TableCell>
+                <Switch
+                  defaultChecked={p.active}
+                  disabled={toggleActive.isPending}
+                  onCheckedChange={(event: boolean) =>
+                    toggleActive.mutate({ id: p.id, active: event })
+                  }
+                />
+              </TableCell>
               <TableCell className='text-right'>
                 <AddProductAlert images={p.galleries} id={p.id} />
               </TableCell>

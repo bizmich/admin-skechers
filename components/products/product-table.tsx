@@ -84,7 +84,7 @@ const ProductTable = () => {
                 </TableCell>
                 <TableCell className='truncate'>{p.title}</TableCell>
                 <TableCell>{p.article}</TableCell>
-                <TableCell>{p.brend.title}</TableCell>
+                <TableCell>{p.brend?.title}</TableCell>
                 <TableCell>{p.article}</TableCell>
                 <TableCell>{p.active ? 'Да' : 'Нет'}</TableCell>
                 <TableCell>
