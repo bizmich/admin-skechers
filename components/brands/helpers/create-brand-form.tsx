@@ -40,7 +40,7 @@ const CreateBrandForm = ({ parentId }: CreateCategoryProps) => {
     <Form {...form}>
       <form
         id='create-category-form'
-        onSubmit={form.handleSubmit((data) => handleSubmit.mutate(data))}
+        // onSubmit={form.handleSubmit((data) => handleSubmit.mutate(data))}
         className=''
       >
         <div className='space-y-3'>

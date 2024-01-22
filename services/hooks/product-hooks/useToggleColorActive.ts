@@ -10,19 +10,19 @@ export interface ColorActive {
 export default function useToggleColorActive() {
   const queryClient = useQueryClient();
 
-  return useMutation<any, Error, ColorActive>({
+  return useMutation<ColorActive, Error, ColorActive>({
     mutationFn: (form: ColorActive) =>
       apiService.toggleProductColorActive(form),
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries({ queryKey: ['product-color-gallery'] });
       queryClient.invalidateQueries({ queryKey: ['single-product'] });
       toast.success('Удачно', {
-        description: `Фотография добавлено`,
+        description: `Цвет теперь ${data.active ? 'активный' : 'неактивный'}`,
       });
     },
     onError(error, variables, context) {
       toast.error('Ошибка', {
-        description: `Произошла ошибка при добавление`,
+        description: `Произошла ошибка при изменение`,
       });
       console.log(error.message);
     },
