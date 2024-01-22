@@ -49,6 +49,7 @@ class APIClient {
       .patch<G>(`/dashboard/product-colors/${form.id}`, { active: form.active })
       .then((response) => response.data);
   };
+
   addColorImageProduct = async <G>(id: string, form: FormData) => {
     return await axiosInstance
       .post<G>(`/dashboard/static/images/product-galleries/${id}`, form, {
@@ -70,8 +71,8 @@ class APIClient {
   };
   updateColorImageProduct = async <G>(form: UpdateProductColorImage) => {
     return await axiosInstance
-      .patch<G>(`/dashboard/static/images/product-galleries/${form.id}`, {
-        ...form,
+      .patch<G>(`/dashboard/product-galleries/${form.id}`, {
+        galleries: form.galleries,
       })
       .then((response) => response.data);
   };

@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import apiService from '../../apiService';
+import { Gallery } from '@/types';
 
 export interface UpdateProductColorImage {
   id: string;
-  sortOrder: number | string;
-  mainImage: boolean;
+  galleries: Gallery[];
 }
 
 export default function useUpdateProductColorImage() {
@@ -13,10 +13,11 @@ export default function useUpdateProductColorImage() {
   return useMutation<unknown, Error, UpdateProductColorImage>({
     mutationFn: (form: UpdateProductColorImage) =>
       apiService.updateColorImageProduct(form),
-    onSuccess(data, variables, context) {
+    onSuccess() {
       queryClient.invalidateQueries({
         queryKey: ['product-color-gallery'],
       });
+      queryClient.invalidateQueries({ queryKey: ['single-product'] });
     },
   });
 }

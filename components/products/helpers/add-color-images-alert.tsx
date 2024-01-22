@@ -18,10 +18,12 @@ import useDeleteProductColorImage from '@/services/hooks/product-hooks/useDelete
 import useProductColorImage from '@/services/hooks/product-hooks/useProductColorImage';
 import useUpdateProductColorImage from '@/services/hooks/product-hooks/useUpdateProductColorImage';
 import { IconCirclePlus } from '@tabler/icons-react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { ProductColorGalleryProps } from '../product-color-gallery';
 import AddProductColorForm from './add-product-color-form';
 import useProductColorGallery from '@/services/hooks/product-hooks/useProductColorGallery';
+import { Gallery } from '@/types';
+import DndKit from '@/components/dnd-kit/dnd-kit';
 
 export interface ProductColorIDProps {
   id: string | null;
@@ -33,6 +35,13 @@ const AddProductAlert = (props: ProductColorIDProps) => {
   const updateImage = useUpdateProductColorImage();
   const handleSubmit = useProductColorImage(props.id || '');
   const { data } = useProductColorGallery(props.id || '');
+  const [todos, setTodos] = useState<Gallery[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setTodos(data);
+    }
+  }, [data]);
 
   const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -43,7 +52,6 @@ const AddProductAlert = (props: ProductColorIDProps) => {
     handleSubmit.mutate(formData);
   };
 
-  const Icon = deleteImage.isPending ? Icons['spinner'] : Icons['trash'];
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -55,65 +63,13 @@ const AddProductAlert = (props: ProductColorIDProps) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Добавить</AlertDialogTitle>
           <div className='flex  flex-wrap gap-3 relative mb-10'>
-            {data &&
-              data.map((image) => (
-                <div key={image.id} className='border rounded-md'>
-                  <div className='relative group size-32'>
-                    <BlurredImage
-                      image={getImageUrl.getProductImages(image.imageUrl)}
-                      className='object-cover rounded-t-md'
-                    />
-                    <span
-                      onClick={() => {
-                        deleteImage.mutate(image.id);
-                      }}
-                      className='group-hover:opacity-100 transition-all duration-150 opacity-0 absolute -right-2 -top-2'
-                    >
-                      <Icon
-                        className={cn(
-                          'size-4 rounded-full bg-white border p-1 box-content shadow-xl',
-                          deleteImage.isPending && 'animate-spin'
-                        )}
-                      />
-                    </span>
-                  </div>
-                  <div className='flex w-full items-center justify-between p-1'>
-                    <div>
-                      <select
-                        onChange={(e) =>
-                          updateImage.mutate({
-                            id: image.id,
-                            mainImage: false,
-                            sortOrder: Number(e.target.value),
-                          })
-                        }
-                        defaultValue={image.sortOrder}
-                      >
-                        {data?.map((i, idx) => (
-                          <option key={i.id + 1} value={idx + 1}>
-                            {idx + 1}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <Input
-                        name='one'
-                        defaultChecked={image.mainImage}
-                        onChange={(e) =>
-                          updateImage.mutate({
-                            id: image.id,
-                            mainImage: e.target.checked,
-                            sortOrder: Number(e.target.value),
-                          })
-                        }
-                        type='radio'
-                        className='size-4 accent-black'
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
+            {todos && (
+              <DndKit
+                onDelete={(id) => deleteImage.mutate(id)}
+                items={todos ?? []}
+                setItems={setTodos}
+              />
+            )}
             <Label
               className={buttonVariants({
                 variant: 'secondary',
@@ -136,8 +92,16 @@ const AddProductAlert = (props: ProductColorIDProps) => {
           <AddProductColorForm {...props} />
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction>
-            {updateImage.isPending && (
+          <AlertDialogAction
+            onClick={() => {
+              if (!props.id && !todos) return null;
+              updateImage.mutate({
+                id: props.id ?? '',
+                galleries: todos,
+              });
+            }}
+          >
+            {(updateImage.isPending || deleteImage.isPending) && (
               <Icons.spinner className='animate-spin size-5' />
             )}
             Готово
