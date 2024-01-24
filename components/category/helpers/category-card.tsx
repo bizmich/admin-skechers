@@ -1,7 +1,9 @@
+import { Icons } from '@/components/icons';
+import { Button } from '@/components/ui/button';
 import { Menu, MenuItems } from '@/types/category-types';
+import Link from 'next/link';
 import CreateCategoryAlert from './create-category-alert';
 import DeleteCategoryAlert from './delete-category-alert';
-import EditCategoryAlert from './edit-category-alert';
 
 const CategoryCard = ({ data }: { data: Menu }) => {
   const filtered: MenuItems[] = Object.values(data).filter((el) => {
@@ -16,12 +18,13 @@ const CategoryCard = ({ data }: { data: Menu }) => {
       {/* Level 1 */}
       <div className='flex gap-2 items-center font-semibold pt-5 pb-2'>
         {data.name}
-        <EditCategoryAlert
-          name={data.name}
-          tag={data.href}
-          parentId={null}
-          id={data.id}
-        />
+        <Button size='icon' variant='ghost'>
+          <Link href={`/store/category/${data.id}`} prefetch={false}>
+            <Icons.edit className='size-5' />
+            <span className='sr-only'>Edit</span>
+          </Link>
+        </Button>
+
         <DeleteCategoryAlert id={data.id} />
       </div>
 
@@ -33,12 +36,13 @@ const CategoryCard = ({ data }: { data: Menu }) => {
             <div key={el.id}>
               <div className='pb-2 flex gap-2 items-center font-semibold'>
                 <p className='text-base'>{el.name}</p>
-                <EditCategoryAlert
-                  parentId={`${el.parentId}`}
-                  id={el.id}
-                  name={el.name}
-                  tag={el.href}
-                />
+                <Button size='icon' variant='ghost'>
+                  <Link href={`/store/category/${el.id}`} prefetch={false}>
+                    <Icons.edit className='size-5' />
+                    <span className='sr-only'>Edit</span>
+                  </Link>
+                </Button>
+
                 <DeleteCategoryAlert id={el.id} />
               </div>
               <ul className='space-y-2 pl-2'>
@@ -50,12 +54,16 @@ const CategoryCard = ({ data }: { data: Menu }) => {
                     >
                       {i.name}
                       <div className='flex gap-2 items-center'>
-                        <EditCategoryAlert
-                          parentId={`${i.parentId}`}
-                          id={i.id}
-                          name={i.name}
-                          tag={i.href}
-                        />
+                        <Button size='icon' variant='ghost'>
+                          <Link
+                            href={`/store/category/${i.id}`}
+                            prefetch={false}
+                          >
+                            <Icons.edit className='size-5' />
+                            <span className='sr-only'>Edit</span>
+                          </Link>
+                        </Button>
+
                         <DeleteCategoryAlert id={i.id} />
                       </div>
                     </li>

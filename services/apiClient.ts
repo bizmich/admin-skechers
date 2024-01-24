@@ -5,6 +5,7 @@ import { AxiosInterceptorOptions, AxiosRequestConfig } from 'axios';
 import { ColorActive } from './hooks/product-hooks/useToggleColorActive';
 
 class APIClient {
+  // categories
   getCategories = async <G>() => {
     return await axiosInstance
       .get<G>(`/dashboard/categories`)
@@ -20,16 +21,39 @@ class APIClient {
       .patch<G>(`/dashboard/categories/${id}`, { ...form })
       .then((response) => response.data);
   };
+
   createSingleCategory = async <G>(form: any) => {
     return await axiosInstance
       .post<G>(`/dashboard/categories`, { ...form })
       .then((response) => response.data);
   };
+
   deleteSingleCategory = async <G>(id: string) => {
     return await axiosInstance
       .delete<G>(`/dashboard/categories/${id}`)
       .then((response) => response.data);
   };
+
+  uploadCategoryImage = async <G>(id: string, form: FormData) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/category-image/${id}`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => response.data);
+  };
+  uploadCategoryBannerImage = async <G>(id: string, form: FormData) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/category-banner/${id}`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => response.data);
+  };
+
+  // product
   getProduct = async <G>(
     form?: filterFormTypes,
     params?: AxiosRequestConfig
@@ -38,6 +62,7 @@ class APIClient {
       .post<G>('/dashboard/products', { ...form }, params)
       .then((response) => response.data);
   };
+
   getSingleProduct = async <G>(id: string) => {
     return await axiosInstance
       .get<G>(`/dashboard/products/${id}`)
