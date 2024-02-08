@@ -14,6 +14,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
@@ -38,12 +39,12 @@ const ProductFilter = () => {
       categoryIds: [],
       keyword: '',
       technologyIds: [],
+      sizeZero: false,
     },
     resolver: zodResolver(filterFormSchema),
   });
 
   console.log('form:', form.getValues());
-
   function onSubmit() {
     const data: Record<string, any> = form.getValues();
 
@@ -145,6 +146,22 @@ const ProductFilter = () => {
               type='text'
               placeholder='Название, артикул, ключевое слово'
             />
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name='sizeZero'
+          render={({ field }) => (
+            <FormItem className='flex items-center justify-center space-y-0 gap-2'>
+              <Input
+                checked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                type='checkbox'
+                className='size-4'
+              />
+              <FormLabel>Все нулевые размеры</FormLabel>
+            </FormItem>
           )}
         />
 

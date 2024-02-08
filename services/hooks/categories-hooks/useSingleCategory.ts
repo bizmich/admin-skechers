@@ -13,12 +13,14 @@ export interface SingleCategory {
   showInHome: boolean;
 }
 
-export default function useSingleCategory(id: string) {
+export default function useSingleCategory(
+  id: string,
+  initialData: SingleCategory
+) {
   return useQuery<SingleCategory>({
-    queryKey: ['single-category'],
+    queryKey: ['single-category', id],
     queryFn: () => apiService.getSingleCategory<SingleCategory>(id),
+    initialData,
     staleTime: 0,
-    retryOnMount: true,
-    refetchIntervalInBackground: true,
   });
 }

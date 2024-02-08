@@ -1,12 +1,12 @@
 import apiService from '@/services/apiService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useUploadCategoryImage = (id: string) => {
+export default function useDeleteCategoryImage() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (form: any) => apiService.uploadCategoryImage(id, form),
+    mutationFn: (id: string) => apiService.deleteCategoryImage(id),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['single-category'] });
     },
   });
-};
+}

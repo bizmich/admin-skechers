@@ -19,6 +19,8 @@ export const createUrl = (
 export const getProductFilter = (data: any) => {
   const queries = { ...data };
 
+  console.log('queries:', queries);
+
   for (const key of Object.keys(queries)) {
     if (queries[key]) {
       if (key !== 'active' && key !== 'keyword' && queries[key]) {
@@ -30,6 +32,14 @@ export const getProductFilter = (data: any) => {
           delete queries[key];
         } else {
           queries[key] = queries[key] === '1' ? true : false;
+        }
+      }
+
+      if (key === 'sizeZero') {
+        if (queries[key][0] === 'true') {
+          queries[key] = true;
+        } else {
+          queries[key] = false;
         }
       }
     } else {

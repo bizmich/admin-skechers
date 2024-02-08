@@ -11,11 +11,13 @@ class APIClient {
       .get<G>(`/dashboard/categories`)
       .then((response) => response.data);
   };
+
   getSingleCategory = async <G>(id: string) => {
     return await axiosInstance
       .get<G>(`/dashboard/categories/${id}`)
       .then((response) => response.data);
   };
+
   updateSingleCategory = async <G>(id: string, form: any) => {
     return await axiosInstance
       .patch<G>(`/dashboard/categories/${id}`, { ...form })
@@ -43,6 +45,7 @@ class APIClient {
       })
       .then((response) => response.data);
   };
+
   uploadCategoryBannerImage = async <G>(id: string, form: FormData) => {
     return await axiosInstance
       .post<G>(`/dashboard/static/images/category-banner/${id}`, form, {
@@ -50,6 +53,18 @@ class APIClient {
           'Content-Type': 'multipart/form-data',
         },
       })
+      .then((response) => response.data);
+  };
+
+  deleteCategoryImage = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/category-image/${id}`)
+      .then((response) => response.data);
+  };
+
+  deleteCategoryBannerImage = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/category-banner/${id}`)
       .then((response) => response.data);
   };
 

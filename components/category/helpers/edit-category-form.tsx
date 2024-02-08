@@ -18,6 +18,11 @@ import { z } from 'zod';
 import UploadCategoryBannerImage from '../upload-category-banner-image';
 import UploadCategoryImage from '../upload-category-image';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useEffect } from 'react';
+import { Icons } from '@/components/icons';
+import useDeleteCategoryImage from '@/services/hooks/categories-hooks/useDeleteCategoryImage';
+import useDeleteCategoryBannerImage from '@/services/hooks/categories-hooks/useDeleteCategoryBannerImage';
 
 export const categoryEditFormSchema = z.object({
   name: z.string(),
@@ -26,35 +31,41 @@ export const categoryEditFormSchema = z.object({
   active: z.boolean(),
   showInHome: z.boolean(),
   bannerUrl: z.string().nullish(),
-  imageUrlForHome: z.string(),
+  imageUrlForHome: z.string().nullish(),
 });
 
-const EditCategoryForm = ({
-  name,
-  href,
-  parentId,
-  id,
-  bannerUrl,
-  imageUrlForHome,
-  active,
-  showInHome,
-  sortOrder,
-}: Partial<SingleCategory>) => {
+interface EditCategoryFormProps extends z.infer<typeof categoryEditFormSchema> {
+  id: string;
+}
+
+const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
+  const deleteImage = useDeleteCategoryImage();
+  const deleteBannerImage = useDeleteCategoryBannerImage();
   const router = useRouter();
   const form = useForm<z.infer<typeof categoryEditFormSchema>>({
     defaultValues: {
-      name: name ?? '',
-      href: href ?? '',
-      active: active ?? false,
-      parentId: parentId || null,
-      showInHome: showInHome ?? true,
-      bannerUrl: bannerUrl ?? null,
-      imageUrlForHome: imageUrlForHome ?? '',
+      name: '',
+      href: '',
+      active: false,
+      parentId: null,
+      showInHome: true,
+      bannerUrl: null,
+      imageUrlForHome: data.imageUrlForHome ?? '',
     },
     resolver: zodResolver(categoryEditFormSchema),
   });
 
-  const handleSubmit = useUpdateCategory(id ?? '');
+  useEffect(() => {
+    if (data) {
+      for (let [key, values] of Object.entries(data)) {
+        form.setValue(key as any, values);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, form.setValue]);
+  console.log('form:', form.getValues());
+
+  const handleSubmit = useUpdateCategory(data.id ?? '');
   // toast.success('Удачно', {
   //   description: `${data.name} | ${data.tag}`,
   // });
@@ -105,7 +116,7 @@ const EditCategoryForm = ({
                 <FormControl>
                   <Input
                     type='checkbox'
-                    defaultChecked={field.value || false}
+                    checked={field.value}
                     onChange={(event) => field.onChange(event.target.checked)}
                     className='size-4'
                   />
@@ -123,7 +134,7 @@ const EditCategoryForm = ({
                 <FormControl>
                   <Input
                     type='checkbox'
-                    defaultChecked={field.value || false}
+                    checked={field.value}
                     onChange={(event) => field.onChange(event.target.checked)}
                     className='size-4'
                   />
@@ -139,15 +150,26 @@ const EditCategoryForm = ({
               <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Фото категории:</FormLabel>
                 <FormControl>
-                  {imageUrlForHome ? (
-                    <Image
-                      src={getImageUrl.getCategoryImages(imageUrlForHome)}
-                      alt='image'
-                      width={100}
-                      height={100}
-                    />
+                  {data.imageUrlForHome ? (
+                    <div className='relative w-44 h-32'>
+                      <Image
+                        src={getImageUrl.getCategoryImages(
+                          data.imageUrlForHome
+                        )}
+                        alt='image'
+                        fill
+                      />
+                      {!deleteImage.isPending ? (
+                        <Icons.trash
+                          onClick={() => deleteImage.mutate(data.id)}
+                          className='absolute -top-2 -right-2 drop-shadow-lg size-5 cursor-pointer p-1 bg-white rounded-full box-content'
+                        />
+                      ) : (
+                        <Icons.spinner className='absolute -top-2 -right-2 drop-shadow-lg size-5 cursor-pointer p-1 bg-white rounded-full box-content' />
+                      )}
+                    </div>
                   ) : (
-                    <UploadCategoryImage id={id ?? ''} />
+                    <UploadCategoryImage id={data.id ?? ''} />
                   )}
                 </FormControl>
                 <FormMessage />
@@ -161,15 +183,24 @@ const EditCategoryForm = ({
               <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Фото баннера:</FormLabel>
                 <FormControl>
-                  {bannerUrl ? (
-                    <Image
-                      src={getImageUrl.getCategoryImages(bannerUrl)}
-                      alt='image'
-                      width={100}
-                      height={100}
-                    />
+                  {data.bannerUrl ? (
+                    <div className='relative w-44 h-32'>
+                      <Image
+                        src={getImageUrl.getCategoryImages(data.bannerUrl)}
+                        alt='image'
+                        fill
+                      />
+                      {!deleteBannerImage.isPending ? (
+                        <Icons.trash
+                          onClick={() => deleteBannerImage.mutate(data.id)}
+                          className='absolute -top-2 -right-2 drop-shadow-lg size-5 cursor-pointer p-1 bg-white rounded-full box-content'
+                        />
+                      ) : (
+                        <Icons.spinner className='absolute -top-2 -right-2 drop-shadow-lg size-5 cursor-pointer p-1 bg-white rounded-full box-content' />
+                      )}
+                    </div>
                   ) : (
-                    <UploadCategoryBannerImage id={id ?? ''} />
+                    <UploadCategoryBannerImage id={data.id ?? ''} />
                   )}
                 </FormControl>
                 <FormMessage />
@@ -178,7 +209,9 @@ const EditCategoryForm = ({
           />
         </div>
         <div className='mt-10 w-full flex justify-end gap-3'>
-          <Button type='button'>Назад</Button>
+          <Button type='button' asChild>
+            <Link href='/store/category'>Назад</Link>
+          </Button>
           <Button type='submit'>Сохранить</Button>
         </div>
       </form>
