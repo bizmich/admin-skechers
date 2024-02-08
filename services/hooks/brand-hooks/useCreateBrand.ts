@@ -5,8 +5,9 @@ import { toast } from 'sonner';
 export default function useCreateBrand() {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (id: string) => apiService.deleteBrand(id),
+  return useMutation<unknown, Error, Record<'title', string>>({
+    mutationFn: (form) =>
+      apiService.createBrand<unknown, Record<'title', string>>(form),
     onSuccess(data, variables, context) {
       if (data) {
         toast.success('Удачно', {

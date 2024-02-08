@@ -18,9 +18,9 @@ const DeleteBrandAlert = ({ id }: { id: string }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant='ghost'>
+        <Button variant='destructive' className='w-full'>
           <Icons.trash className='size-5' />
-          <span className='sr-only'>Delete</span>
+          Удалить
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -35,6 +35,7 @@ const DeleteBrandAlert = ({ id }: { id: string }) => {
               deleteBrand.mutate(id);
             }}
           >
+            {deleteBrand.isPending && <Icons.spinner />}
             Удалить
           </AlertDialogAction>
         </AlertDialogFooter>

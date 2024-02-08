@@ -4,34 +4,33 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import useDeleteBrand from '@/services/hooks/brand-hooks/useDeleteBrand';
+import { PlusIcon } from 'lucide-react';
 import CreateBrandForm from './create-brand-form';
 
-const CreateBrandAlert = ({ id }: { id: string }) => {
+const CreateBrandAlert = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size='icon' variant='ghost'>
-          <Icons.edit className='size-5' />
-        </Button>
+        <div className='flex justify-center items-center size-full'>
+          <PlusIcon className='size-16' />
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent className='max-w-2xl'>
         <AlertDialogHeader>
-          <AlertDialogTitle>Изменить бренд</AlertDialogTitle>
-          <CreateBrandForm parentId={id} />
+          <AlertDialogTitle>Добавить бренд</AlertDialogTitle>
         </AlertDialogHeader>
+        <CreateBrandForm />
         <AlertDialogFooter>
           <AlertDialogFooter>
             <AlertDialogCancel>Отмена</AlertDialogCancel>
-            <AlertDialogAction type='submit' form='update-single-product-form'>
-              Изменить
+            <AlertDialogAction type='submit' form='create-brand-form'>
+              Добавить
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogFooter>

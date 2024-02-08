@@ -7,6 +7,10 @@ class ImagesUrls {
   getCategoryImages = (image: string) => {
     return `${_url}/dashboard/static/images/category-image/${image}`;
   };
+
+  getBrandImages = (image: string) => {
+    return `${_url}/dashboard/static/images/brands/${image}`;
+  };
 }
 
 export const getImageUrl = new ImagesUrls();

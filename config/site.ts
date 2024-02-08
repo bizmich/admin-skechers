@@ -25,14 +25,6 @@ export const siteConfig = {
           name: 'Товары',
           href: '/store/products',
         },
-      ],
-    },
-    {
-      id: '3',
-      icon: 'pages',
-      name: 'Страницы',
-
-      subMenu: [
         {
           id: 'brands',
           name: 'Бренды',
@@ -44,15 +36,23 @@ export const siteConfig = {
           href: '/technologies',
         },
         {
-          id: 'offers',
-          name: 'Наши предложение',
-          href: '/offers',
-        },
-        {
           id: 'orders',
           name: 'Заказы',
           href: '/orders',
         },
+        {
+          id: 'clients',
+          name: 'Клиенты',
+          href: '/clients',
+        },
+      ],
+    },
+    {
+      id: '3',
+      icon: 'pages',
+      name: 'Сайт',
+
+      subMenu: [
         {
           id: 'sliders',
           name: 'Слайдер',
@@ -63,15 +63,21 @@ export const siteConfig = {
           name: 'Баннеры',
           href: '/banners',
         },
+
         {
           id: 'video',
           name: 'Видео',
           href: '/videos',
         },
         {
-          id: 'clients',
-          name: 'Клиенты',
-          href: '/clients',
+          id: 'pages',
+          name: 'Страницы',
+          href: '/pages',
+        },
+        {
+          id: 'stores',
+          name: 'Магазины',
+          href: '/stores',
         },
       ],
     },

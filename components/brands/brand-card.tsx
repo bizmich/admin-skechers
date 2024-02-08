@@ -1,16 +1,18 @@
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader } from '../ui/card';
-import { Button } from '../ui/button';
-import { Icons } from '../icons';
 import { Brands } from '@/types';
-import DeleteBrandAlert from './helpers/delete-brand-alert';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardDescription, CardHeader } from '../ui/card';
+import { Icons } from '../icons';
+import { PlusIcon } from 'lucide-react';
 import CreateBrandAlert from './helpers/create-brand-alert';
+import DeleteBrandAlert from './helpers/delete-brand-alert';
 
 const BrandCard = ({ data }: { data: Brands[] }) => {
   return (
-    <div className='grid grid-cols-4 gap-5'>
+    <div className='grid grid-cols-3 gap-5'>
       {data?.map((el) => (
-        <Card key={el.id}>
+        <Card key={el.id} className='flex flex-col justify-between'>
           <CardHeader>
             <Image
               src={
@@ -23,15 +25,17 @@ const BrandCard = ({ data }: { data: Brands[] }) => {
             />
             <CardDescription>{el.title}</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className='grid grid-cols-2'>
-              <CreateBrandAlert id={el.id} />
-              <DeleteBrandAlert id={el.id} />
-              <div></div>
-            </div>
+          <CardContent className='space-y-3'>
+            <Button variant='secondary' className='w-full'>
+              <Link href={`/brands/${el.id}`}>Изменить</Link>
+            </Button>
+            <DeleteBrandAlert id={el.id} />
           </CardContent>
         </Card>
       ))}
+      <Card>
+        <CreateBrandAlert />
+      </Card>
     </div>
   );
 };

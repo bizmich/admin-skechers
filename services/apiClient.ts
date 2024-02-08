@@ -1,7 +1,7 @@
 import { filterFormTypes } from '@/lib/validations/product-filters-validation';
 import axiosInstance from './axiosInstance';
 import { UpdateProductColorImage } from './hooks/product-hooks/useUpdateProductColorImage';
-import { AxiosInterceptorOptions, AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { ColorActive } from './hooks/product-hooks/useToggleColorActive';
 
 class APIClient {
@@ -123,14 +123,66 @@ class APIClient {
   };
 
   // Brands
+
   getBrands = async <G>() => {
     return await axiosInstance
       .get<G>(`/dashboard/brends`)
       .then((response) => response.data);
   };
+
+  getSingleBrands = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/brends/${id}`)
+      .then((response) => response.data);
+  };
+
   deleteBrand = async <G>(id: string) => {
     return await axiosInstance
       .delete<G>(`/dashboard/brends/${id}`)
+      .then((response) => response.data);
+  };
+
+  createBrand = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/brends`, form)
+      .then((response) => response.data);
+  };
+
+  updateBrand = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/brends/${id}`, form)
+      .then((response) => response.data);
+  };
+
+  uploadBrandLogo = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/brends/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  uploadBrandBanner = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/brend-banner/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  deleteBrandLogo = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/brends/${id}`)
+      .then((response) => response.data);
+  };
+
+  deleteBrandBannerImage = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/brend-banner/${id}`)
       .then((response) => response.data);
   };
 
