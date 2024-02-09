@@ -14,14 +14,12 @@ import { z } from 'zod';
 
 export const createSliderFormSchema = z.object({
   title: z.string(),
-  id: z.string(),
 });
 
 const CreateSliderForm = () => {
   const form = useForm<z.infer<typeof createSliderFormSchema>>({
     defaultValues: {
       title: '',
-      id: '',
     },
     resolver: zodResolver(createSliderFormSchema),
   });
@@ -45,21 +43,6 @@ const CreateSliderForm = () => {
                 <FormLabel>Название</FormLabel>
                 <FormControl>
                   <Input {...field} type='text' placeholder='Название' />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name='id'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Slug</FormLabel>
-                <FormControl>
-                  <Input {...field} type='text' placeholder='Slug' />
                 </FormControl>
 
                 <FormMessage />
