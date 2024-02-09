@@ -1,4 +1,5 @@
 import { Icons } from '@/components/icons';
+import { EditSliderItems } from '@/lib/validations/slider-form-validation';
 
 export interface Navigation {
   id: string;
@@ -81,10 +82,12 @@ export interface Brands {
 export interface Technologies {
   active: boolean;
   id: string;
-  logoUrl: null | string;
+  imageUrl: null | string;
   sortOrder: number;
   title: string;
 }
+
+export interface Slider extends EditSliderItems {}
 
 export interface SingleProduct extends Product {
   brendId: string;

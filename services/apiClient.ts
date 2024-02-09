@@ -187,9 +187,98 @@ class APIClient {
   };
 
   // Technologies
+
   getTechnologies = async <G>() => {
     return await axiosInstance
       .get<G>(`/dashboard/technologies`)
+      .then((response) => response.data);
+  };
+
+  getSingleTech = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/technologies/${id}`)
+      .then((response) => response.data);
+  };
+
+  createTech = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/technologies`, form)
+      .then((response) => response.data);
+  };
+
+  deleteTech = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/technologies/${id}`)
+      .then((response) => response.data);
+  };
+
+  updateTech = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/technologies/${id}`, form)
+      .then((response) => response.data);
+  };
+
+  uploadTechLogo = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/technologies/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  deleteTechLogo = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/technologies/${id}`)
+      .then((response) => response.data);
+  };
+
+  // Slider
+
+  getSliders = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/sliders`)
+      .then((response) => response.data);
+  };
+
+  getSingleSlider = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/sliders/${id}`)
+      .then((response) => response.data);
+  };
+
+  createSlider = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/sliders`, form)
+      .then((response) => response.data);
+  };
+
+  deleteSlider = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/sliders/${id}`)
+      .then((response) => response.data);
+  };
+
+  updateSlider = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/sliders/${id}`, form)
+      .then((response) => response.data);
+  };
+
+  uploadSliderLogo = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/sliders/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  deleteSliderLogo = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/sliders/${id}`)
       .then((response) => response.data);
   };
 }
