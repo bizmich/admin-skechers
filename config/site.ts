@@ -75,9 +75,9 @@ export const siteConfig = {
           href: '/pages',
         },
         {
-          id: 'stores',
+          id: 'shops',
           name: 'Магазины',
-          href: '/stores',
+          href: '/shops',
         },
       ],
     },

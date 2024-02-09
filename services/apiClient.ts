@@ -377,6 +377,38 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/videos/${id}`)
       .then((response) => response.data);
   };
+
+  // shops
+
+  getShops = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/shops`)
+      .then((response) => response.data);
+  };
+
+  getSingleShop = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/shops/${id}`)
+      .then((response) => response.data);
+  };
+
+  createShop = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/shops`, form)
+      .then((response) => response.data);
+  };
+
+  deleteShop = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/shops/${id}`)
+      .then((response) => response.data);
+  };
+
+  updateShop = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/shops/${id}`, form)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;
