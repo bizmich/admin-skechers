@@ -8,7 +8,7 @@ import {
 import SliderCard from '@/components/sliders/slider-card';
 import useSliders from '@/services/hooks/slider-hooks/useSliders';
 
-const BrandPage = () => {
+const SliderPage = () => {
   const { data } = useSliders();
 
   return (
@@ -19,4 +19,4 @@ const BrandPage = () => {
   );
 };
 
-export default BrandPage;
+export default SliderPage;

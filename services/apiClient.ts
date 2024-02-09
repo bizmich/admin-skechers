@@ -281,6 +281,54 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/sliders/${id}`)
       .then((response) => response.data);
   };
+
+  // banners
+
+  getBanners = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/banners`)
+      .then((response) => response.data);
+  };
+
+  getSingleBanner = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/banners/${id}`)
+      .then((response) => response.data);
+  };
+
+  createBanner = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/banners`, form)
+      .then((response) => response.data);
+  };
+
+  deleteBanner = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/banners/${id}`)
+      .then((response) => response.data);
+  };
+
+  updateBanner = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/banners/${id}`, form)
+      .then((response) => response.data);
+  };
+
+  uploadBannerLogo = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/banners/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  deleteBannerLogo = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/banners/${id}`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;
