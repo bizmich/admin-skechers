@@ -1,12 +1,12 @@
-import { Banner } from '@/types';
+import { Video } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader } from '../ui/card';
-import CreateBannerAlert from './helpers/create-banner-alert';
-import DeleteBannerAlert from './helpers/delete-banner-alert';
+import CreateVideoAlert from './helpers/create-video-alert';
+import DeleteVideoAlert from './helpers/delete-video-alert';
 
-const BannerCard = ({ data }: { data: Banner[] }) => {
+const VideoCard = ({ data }: { data: Video[] }) => {
   return (
     <div className='grid grid-cols-3 gap-5'>
       {data?.map((el) => (
@@ -14,7 +14,7 @@ const BannerCard = ({ data }: { data: Banner[] }) => {
           <CardHeader>
             <Image
               src={
-                `https://365trends.tj/api/static/images/banners/${el.imageUrl}` ??
+                `https://365trends.tj/api/static/images/videos/${el.thumbnailUrl}` ??
                 ''
               }
               alt={`${el.title} logo`}
@@ -25,17 +25,17 @@ const BannerCard = ({ data }: { data: Banner[] }) => {
           </CardHeader>
           <CardContent className='space-y-3'>
             <Button variant='secondary' className='w-full'>
-              <Link href={`/banners/${el.id}`}>Изменить</Link>
+              <Link href={`/videos/${el.id}`}>Изменить</Link>
             </Button>
-            <DeleteBannerAlert id={el.id ?? ''} />
+            <DeleteVideoAlert id={el.id ?? ''} />
           </CardContent>
         </Card>
       ))}
       <Card>
-        <CreateBannerAlert />
+        <CreateVideoAlert />
       </Card>
     </div>
   );
 };
 
-export default BannerCard;
+export default VideoCard;

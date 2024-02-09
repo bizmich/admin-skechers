@@ -329,6 +329,54 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/banners/${id}`)
       .then((response) => response.data);
   };
+
+  // videos
+
+  getVideos = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/videos`)
+      .then((response) => response.data);
+  };
+
+  getSingleVideo = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/videos/${id}`)
+      .then((response) => response.data);
+  };
+
+  createVideo = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/videos`, form)
+      .then((response) => response.data);
+  };
+
+  deleteVideo = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/videos/${id}`)
+      .then((response) => response.data);
+  };
+
+  updateVideo = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/videos/${id}`, form)
+      .then((response) => response.data);
+  };
+
+  uploadVideoLogo = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/videos/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  deleteVideoLogo = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/videos/${id}`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

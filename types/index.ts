@@ -1,6 +1,7 @@
 import { Icons } from '@/components/icons';
 import { EditBannerItems } from '@/lib/validations/banner-form-validation';
 import { EditSliderItems } from '@/lib/validations/slider-form-validation';
+import { EditVideoItems } from '@/lib/validations/video-form-validation';
 
 export interface Navigation {
   id: string;
@@ -90,6 +91,7 @@ export interface Technologies {
 
 export interface Slider extends EditSliderItems {}
 export interface Banner extends EditBannerItems {}
+export interface Video extends EditVideoItems {}
 
 export interface SingleProduct extends Product {
   brendId: string;
