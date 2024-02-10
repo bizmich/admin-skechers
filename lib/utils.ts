@@ -51,5 +51,6 @@ export const getProductFilter = (data: any) => {
 };
 
 export function truncate(str: string, length: number) {
+  if (!str) return null;
   return str.length > length ? `${str.substring(0, length)}...` : str;
 }

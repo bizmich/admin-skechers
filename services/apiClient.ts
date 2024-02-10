@@ -409,6 +409,48 @@ class APIClient {
       .patch<G>(`/dashboard/shops/${id}`, form)
       .then((response) => response.data);
   };
+
+  // pages
+
+  getPages = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/pages`)
+      .then((response) => response.data);
+  };
+
+  getSinglePage = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/pages/${id}`)
+      .then((response) => response.data);
+  };
+
+  createPage = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/pages`, form)
+      .then((response) => response.data);
+  };
+
+  updatePage = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/pages/${id}`, form)
+      .then((response) => response.data);
+  };
+
+  uploadPageBanner = async <G>(
+    id: string,
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/pages/${id}`, form, params)
+      .then((response) => response.data);
+  };
+
+  deletePageBannerImage = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/pages/${id}`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

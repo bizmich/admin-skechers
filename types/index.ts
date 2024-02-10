@@ -1,5 +1,6 @@
 import { Icons } from '@/components/icons';
 import { EditBannerItems } from '@/lib/validations/banner-form-validation';
+import { EditPagesItems } from '@/lib/validations/pages-form-validation';
 import { EditShopsItems } from '@/lib/validations/shops-form-validation';
 import { EditSliderItems } from '@/lib/validations/slider-form-validation';
 import { EditVideoItems } from '@/lib/validations/video-form-validation';
@@ -94,6 +95,7 @@ export interface Slider extends EditSliderItems {}
 export interface Banner extends EditBannerItems {}
 export interface Video extends EditVideoItems {}
 export interface Shops extends EditShopsItems {}
+export interface Pages extends EditPagesItems {}
 
 export interface SingleProduct extends Product {
   brendId: string;
