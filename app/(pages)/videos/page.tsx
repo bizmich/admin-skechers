@@ -5,6 +5,7 @@ import {
   ContainerContent,
   ContainerTitle,
 } from '@/components/pages-container';
+import CreateVideoAlert from '@/components/video/helpers/create-video-alert';
 import VideoCard from '@/components/video/video-card';
 import useVideos from '@/services/hooks/video-hooks/useVideos';
 
@@ -13,7 +14,10 @@ const VideoPage = () => {
 
   return (
     <Container>
-      <ContainerTitle>Видео</ContainerTitle>
+      <ContainerTitle className='flex justify-between items-center'>
+        Видео
+        <CreateVideoAlert />
+      </ContainerTitle>
       <ContainerContent>{data && <VideoCard data={data} />}</ContainerContent>
     </Container>
   );
