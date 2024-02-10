@@ -153,7 +153,7 @@ const ProductFilter = () => {
           control={form.control}
           name='sizeZero'
           render={({ field }) => (
-            <FormItem className='flex items-center justify-center space-y-0 gap-2'>
+            <FormItem className='flex items-center space-y-0 gap-2'>
               <Input
                 checked={field.value}
                 onChange={(e) => field.onChange(e.target.checked)}
