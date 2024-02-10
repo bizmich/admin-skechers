@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card';
-import CreateShopAlert from './helpers/create-shop-alert';
 import DeleteShopAlert from './helpers/delete-shop-alert';
 
 const ShopCard = ({ data }: { data: Shops[] }) => {
@@ -45,7 +44,7 @@ const ShopCard = ({ data }: { data: Shops[] }) => {
               <span>{el.main ? 'ДА' : 'НЕТ'}</span>
             </div>
           </CardContent>
-          <CardFooter className='flex items-center gap-2'>
+          <CardFooter className='flex items-center gap-3'>
             <Button variant='secondary' className='w-full'>
               <Link href={`/shops/${el.id}`}>Изменить</Link>
             </Button>
@@ -53,9 +52,6 @@ const ShopCard = ({ data }: { data: Shops[] }) => {
           </CardFooter>
         </Card>
       ))}
-      <Card>
-        <CreateShopAlert />
-      </Card>
     </div>
   );
 };

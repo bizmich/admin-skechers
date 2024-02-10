@@ -29,7 +29,6 @@ const CreateShopForm = () => {
 
   const handleSubmit = useCreateShops();
 
-  console.log('form:', form.getValues());
   return (
     <Form {...form}>
       <form
@@ -40,7 +39,7 @@ const CreateShopForm = () => {
           handleSubmit.mutate(data);
         })}
       >
-        <div className='space-y-3'>
+        <div className='grid grid-cols-2 gap-5'>
           <FormField
             control={form.control}
             name='title'
