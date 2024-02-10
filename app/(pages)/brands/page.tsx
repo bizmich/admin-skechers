@@ -1,6 +1,7 @@
 'use client';
 
 import BrandCard from '@/components/brands/brand-card';
+import CreateBrandAlert from '@/components/brands/helpers/create-brand-alert';
 import {
   Container,
   ContainerContent,
@@ -13,7 +14,10 @@ const BrandPage = () => {
 
   return (
     <Container>
-      <ContainerTitle>Бренды</ContainerTitle>
+      <ContainerTitle className='flex justify-between items-center'>
+        Бренды
+        <CreateBrandAlert />
+      </ContainerTitle>
       <ContainerContent>{data && <BrandCard data={data} />}</ContainerContent>
     </Container>
   );

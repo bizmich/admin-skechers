@@ -2,10 +2,13 @@ import { Brands } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardHeader } from '../ui/card';
-import { Icons } from '../icons';
-import { PlusIcon } from 'lucide-react';
-import CreateBrandAlert from './helpers/create-brand-alert';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card';
 import DeleteBrandAlert from './helpers/delete-brand-alert';
 
 const BrandCard = ({ data }: { data: Brands[] }) => {
@@ -14,6 +17,9 @@ const BrandCard = ({ data }: { data: Brands[] }) => {
       {data?.map((el) => (
         <Card key={el.id} className='flex flex-col justify-between'>
           <CardHeader>
+            <CardTitle>{el.title}</CardTitle>
+          </CardHeader>
+          <CardContent className='flex justify-center'>
             <Image
               src={
                 `https://365trends.tj/api/static/images/brends/${el.logoUrl}` ??
@@ -23,19 +29,15 @@ const BrandCard = ({ data }: { data: Brands[] }) => {
               width={200}
               height={120}
             />
-            <CardDescription>{el.title}</CardDescription>
-          </CardHeader>
-          <CardContent className='space-y-3'>
-            <Button variant='secondary' className='w-full'>
+          </CardContent>
+          <CardFooter className='space-x-3'>
+            <Button variant='secondary' className='w-full' asChild>
               <Link href={`/brands/${el.id}`}>Изменить</Link>
             </Button>
             <DeleteBrandAlert id={el.id} />
-          </CardContent>
+          </CardFooter>
         </Card>
       ))}
-      <Card>
-        <CreateBrandAlert />
-      </Card>
     </div>
   );
 };
