@@ -451,6 +451,56 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/pages/${id}`)
       .then((response) => response.data);
   };
+
+  // settings
+
+  getSettings = async <G>() => {
+    return await axiosInstance
+      .get<G>(`/dashboard/settings`)
+      .then((response) => response.data);
+  };
+
+  createSetting = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/settings`, form)
+      .then((response) => response.data);
+  };
+
+  updateSetting = async <G, P>(form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/settings`, form)
+      .then((response) => response.data);
+  };
+
+  uploadSettingMainLogo = async <G>(
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/settings/logo`, form, params)
+      .then((response) => response.data);
+  };
+
+  uploadSettingFooterLogo = async <G>(
+    form: FormData,
+    params: AxiosRequestConfig
+  ) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/static/images/settings/footer-logo`, form, params)
+      .then((response) => response.data);
+  };
+
+  deleteSettingMainLogo = async <G>() => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/pages/logo`)
+      .then((response) => response.data);
+  };
+
+  deleteSettingFooterLogo = async <G>() => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/static/images/pages/footer-logo`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

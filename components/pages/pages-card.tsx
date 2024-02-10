@@ -1,3 +1,4 @@
+import { truncate } from '@/lib/utils';
 import { Pages } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -5,13 +6,10 @@ import { Button } from '../ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '../ui/card';
-import DeleteBrandAlert from './helpers/delete-brand-alert';
-import { truncate } from '@/lib/utils';
 
 const PagesCard = ({ data }: { data: Pages[] }) => {
   return (
@@ -59,7 +57,6 @@ const PagesCard = ({ data }: { data: Pages[] }) => {
             <Button variant='secondary' className='w-full' asChild>
               <Link href={`/pages/${el.slug}`}>Изменить</Link>
             </Button>
-            <DeleteBrandAlert id={el?.id ?? ''} />
           </CardFooter>
         </Card>
       ))}
