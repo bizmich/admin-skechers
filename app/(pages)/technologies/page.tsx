@@ -5,6 +5,7 @@ import {
   ContainerContent,
   ContainerTitle,
 } from '@/components/pages-container';
+import CreateTechAlert from '@/components/technology/helpers/create-tech-alert';
 import TechnologyCard from '@/components/technology/technology-card';
 import useTechnologies from '@/services/hooks/technology-hooks/useTechnologies';
 
@@ -13,7 +14,10 @@ const BrandPage = () => {
 
   return (
     <Container>
-      <ContainerTitle>Технологии</ContainerTitle>
+      <ContainerTitle className='flex justify-between items-center'>
+        Технологии
+        <CreateTechAlert />
+      </ContainerTitle>
       <ContainerContent>
         {data && <TechnologyCard data={data} />}
       </ContainerContent>
