@@ -2,8 +2,13 @@ import { Slider } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardHeader } from '../ui/card';
-import CreateSliderAlert from './helpers/create-slider-alert';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card';
 import DeleteSliderAlert from './helpers/delete-slider-alert';
 
 const SliderCard = ({ data }: { data: Slider[] }) => {
@@ -12,28 +17,27 @@ const SliderCard = ({ data }: { data: Slider[] }) => {
       {data?.map((el) => (
         <Card key={el.id} className='flex flex-col justify-between'>
           <CardHeader>
+            <CardTitle>{el.title}</CardTitle>
+          </CardHeader>
+          <CardContent className='flex justify-center'>
             <Image
               src={
                 `https://365trends.tj/api/static/images/sliders/${el.imageUrl}` ??
                 ''
               }
               alt={`${el.title} logo`}
-              width={200}
-              height={120}
+              width={250}
+              height={250}
             />
-            <CardDescription>{el.title}</CardDescription>
-          </CardHeader>
-          <CardContent className='space-y-3'>
+          </CardContent>
+          <CardFooter className='space-x-3'>
             <Button variant='secondary' className='w-full'>
               <Link href={`/sliders/${el.id}`}>Изменить</Link>
             </Button>
             <DeleteSliderAlert id={el.id ?? ''} />
-          </CardContent>
+          </CardFooter>
         </Card>
       ))}
-      <Card>
-        <CreateSliderAlert />
-      </Card>
     </div>
   );
 };
