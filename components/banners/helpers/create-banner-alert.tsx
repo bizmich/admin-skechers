@@ -10,14 +10,16 @@ import {
 } from '@/components/ui/alert-dialog';
 import { PlusIcon } from 'lucide-react';
 import CreateBannerForm from './create-banner-form';
+import { Button } from '@/components/ui/button';
 
 const CreateBannerAlert = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <div className='flex justify-center items-center size-full'>
-          <PlusIcon className='size-16' />
-        </div>
+        <Button variant='secondary'>
+          <PlusIcon className='size-4' />
+          Добавить
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className='max-w-2xl'>
         <AlertDialogHeader>
