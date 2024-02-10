@@ -31,7 +31,7 @@ const VideoCard = ({ data }: { data: Video[] }) => {
               height={250}
             />
           </CardContent>
-          <CardFooter className='space-y-3'>
+          <CardFooter className='space-x-3'>
             <Button variant='secondary' className='w-full'>
               <Link href={`/videos/${el.id}`}>Изменить</Link>
             </Button>
