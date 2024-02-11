@@ -29,19 +29,3 @@ export const filterEditFormSchema = z.object({
 });
 
 export type filterEditFormTypes = z.infer<typeof filterEditFormSchema>;
-
-// {
-//   "sortOrder": 0,
-//   "title": "string",
-//   "description": "string",
-//   "brendId": "string",
-//   "newProduct": true,
-//   "hit": true,
-//   "active": true,
-//   "categoryIds": [
-//     "string"
-//   ],
-//   "technologyIds": [
-//     "string"
-//   ]
-// }

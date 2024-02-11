@@ -1,11 +1,12 @@
 'use client';
 import { createUrl } from '@/lib/utils';
-import { usersFilterFormSchema } from '@/lib/validations/product-filters-validation';
+import { filterFormSchema } from '@/lib/validations/product-filters-validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { BrandMultiSelect } from '../brands-selector';
 import CategorySelector from '../category-selector';
 import TechnologiesSelector from '../technologies-selector';
 import { Button } from '../ui/button';
@@ -18,7 +19,6 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { BrandMultiSelect } from '../brands-selector';
 import {
   Select,
   SelectContent,
@@ -32,7 +32,7 @@ const ProductFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const form = useForm<z.infer<typeof usersFilterFormSchema>>({
+  const form = useForm<z.infer<typeof filterFormSchema>>({
     defaultValues: {
       active: 'all' ?? '',
       brendIds: [],
@@ -41,7 +41,7 @@ const ProductFilter = () => {
       technologyIds: [],
       sizeZero: false,
     },
-    resolver: zodResolver(usersFilterFormSchema),
+    resolver: zodResolver(filterFormSchema),
   });
 
   console.log('form:', form.getValues());
