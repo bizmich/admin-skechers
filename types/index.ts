@@ -162,3 +162,21 @@ export interface Users {
   phone: string;
   ordersQuantity: number;
 }
+
+export interface SingleUser extends Users {
+  orders: UserOrders[];
+}
+
+export interface UserOrders {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  address?: string;
+  orderNo: string;
+  note: any;
+  code: any;
+  status: string;
+  orderSum: string;
+  deliveryPrice: string;
+}

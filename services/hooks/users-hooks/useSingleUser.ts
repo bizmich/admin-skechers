@@ -1,11 +1,11 @@
-import { Users } from '@/types';
+import { SingleUser } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import apiService from '../../apiService';
 
 export default function useSingleUser(id: string) {
-  return useQuery<Users>({
+  return useQuery<SingleUser>({
     queryKey: ['single-user'],
-    queryFn: () => apiService.getSingleUser<Users>(id),
+    queryFn: () => apiService.getSingleUser<SingleUser>(id),
     enabled: !!id,
   });
 }
