@@ -1,6 +1,6 @@
 'use client';
 import { createUrl } from '@/lib/utils';
-import { filterFormSchema } from '@/lib/validations/product-filters-validation';
+import { usersFilterFormSchema } from '@/lib/validations/product-filters-validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -32,7 +32,7 @@ const ProductFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const form = useForm<z.infer<typeof filterFormSchema>>({
+  const form = useForm<z.infer<typeof usersFilterFormSchema>>({
     defaultValues: {
       active: 'all' ?? '',
       brendIds: [],
@@ -41,7 +41,7 @@ const ProductFilter = () => {
       technologyIds: [],
       sizeZero: false,
     },
-    resolver: zodResolver(filterFormSchema),
+    resolver: zodResolver(usersFilterFormSchema),
   });
 
   console.log('form:', form.getValues());

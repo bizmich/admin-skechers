@@ -1,3 +1,4 @@
+'use client';
 import {
   Accordion,
   AccordionContent,
@@ -10,9 +11,12 @@ import Link from 'next/link';
 import Logo from '../Logo';
 import { Icons } from '../icons';
 import SiteSetting from './site-setting';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const SiteAsideMenu = () => {
   const { navigation } = siteConfig;
+  const pathname = usePathname();
+
   return (
     <aside className='w-64 px-5'>
       <div className='flex items-center justify-center py-5'>
@@ -39,11 +43,16 @@ const SiteAsideMenu = () => {
                   </LinkTag>
                 </AccordionTrigger>
                 {el.subMenu?.map((el) => (
-                  <AccordionContent
-                    key={el.id}
-                    className='text-sm pl-8 py-1 cursor-pointer hover:underline'
-                  >
-                    <Link href={el.href}>{el.name}</Link>
+                  <AccordionContent key={el.id} className='text-sm pl-8 py-1'>
+                    <Link
+                      href={el.href}
+                      className={cn(
+                        'w-full inline-block hover:underline cursor-pointer',
+                        pathname === el.href && 'font-bold'
+                      )}
+                    >
+                      {el.name}
+                    </Link>
                   </AccordionContent>
                 ))}
               </AccordionItem>

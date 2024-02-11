@@ -32,7 +32,7 @@ export const siteConfig = {
         },
         {
           id: 'technologies',
-          name: 'Современные технологии',
+          name: 'Технологии',
           href: '/technologies',
         },
         {
@@ -41,9 +41,9 @@ export const siteConfig = {
           href: '/orders',
         },
         {
-          id: 'clients',
+          id: 'users',
           name: 'Клиенты',
-          href: '/clients',
+          href: '/users',
         },
       ],
     },

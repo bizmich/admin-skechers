@@ -521,6 +521,32 @@ class APIClient {
       .patch<G>(`/dashboard/orders/${id}/proceed`, form)
       .then((response) => response.data);
   };
+
+  // users
+
+  getUsers = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/user`, form)
+      .then((response) => response.data);
+  };
+
+  getSingleUser = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/users/${id}`)
+      .then((response) => response.data);
+  };
+
+  blockUser = async <G>(id: string) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/users/${id}/ban`)
+      .then((response) => response.data);
+  };
+
+  unblockUser = async <G, P>(id: string) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/users/${id}/unblock`)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

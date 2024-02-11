@@ -153,3 +153,12 @@ export interface SingleOrderItem {
   quantity: number;
   amount: number;
 }
+
+export interface Users {
+  id: string;
+  name: string;
+  role: string;
+  active: boolean;
+  phone: string;
+  ordersQuantity: number;
+}
