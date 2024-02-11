@@ -118,9 +118,13 @@ const SingleOrderTable = ({ id }: { id: string }) => {
                   <TableRow key={el.id}>
                     <TableCell className='font-medium'>
                       <Image
-                        src={`https://365trends.tj/api/dashboard/static/images/orders/${el.imageUrl}`}
+                        src={`https://365trends.tj/api/static/images/products/${el.imageUrl}`}
                         width={80}
                         height={80}
+                        style={{
+                          width: 80,
+                          height: 80,
+                        }}
                         alt='images'
                       />
                     </TableCell>
