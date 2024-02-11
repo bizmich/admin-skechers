@@ -504,9 +504,9 @@ class APIClient {
 
   // Orders
 
-  getOrders = async <G>(params: AxiosRequestConfig) => {
+  getOrders = async <G, P>(form: P, params: AxiosRequestConfig) => {
     return await axiosInstance
-      .post<G>(`/dashboard/orders`, undefined, params)
+      .post<G>(`/dashboard/orders`, form, params)
       .then((response) => response.data);
   };
 

@@ -20,8 +20,19 @@ export default function OrdersTable() {
   const searchParams = useSearchParams();
   const page = searchParams.get('page') ?? '1';
   const perPage = searchParams?.get('per_page') ?? '10';
+  const createdDateFrom = searchParams?.get('createdDateFrom') ?? null;
+  const createDateTo = searchParams?.get('createDateTo') ?? null;
+  const status = searchParams?.get('status') ?? null;
 
-  const { data, isLoading } = useOrders({ page, perPage: perPage });
+  const { data, isLoading } = useOrders({
+    form: {
+      createdDateFrom,
+      createDateTo,
+      status,
+    },
+    page,
+    perPage: perPage,
+  });
 
   const createQueryString = useCallback(
     (params: Record<string, string | number | null>) => {

@@ -161,7 +161,7 @@ const SingleOrderTable = ({ id }: { id: string }) => {
 
 export default SingleOrderTable;
 
-const statuses = [
+export const statuses = [
   {
     title: 'Новый заказ',
     value: 'NEW_ORDER',
