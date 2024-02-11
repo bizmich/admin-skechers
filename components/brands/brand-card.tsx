@@ -20,15 +20,17 @@ const BrandCard = ({ data }: { data: Brands[] }) => {
             <CardTitle>{el.title}</CardTitle>
           </CardHeader>
           <CardContent className='flex justify-center'>
-            <Image
-              src={
-                `https://365trends.tj/api/static/images/brends/${el.logoUrl}` ??
-                ''
-              }
-              alt={`${el.title} logo`}
-              width={200}
-              height={120}
-            />
+            <div className='h-44 relative w-full'>
+              <Image
+                src={
+                  `https://365trends.tj/api/static/images/brends/${el.logoUrl}` ??
+                  ''
+                }
+                alt={`${el.title} logo`}
+                fill
+                className='object-cover'
+              />
+            </div>
           </CardContent>
           <CardFooter className='space-x-3'>
             <Button variant='secondary' className='w-full' asChild>

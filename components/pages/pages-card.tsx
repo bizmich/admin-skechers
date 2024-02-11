@@ -20,7 +20,7 @@ const PagesCard = ({ data }: { data: Pages[] }) => {
             <CardTitle>{el.title}</CardTitle>
           </CardHeader>
           <CardContent className='flex flex-col justify-center  gap-3'>
-            <div className='relative h-36 w-full'>
+            <div className='relative h-44 w-full'>
               <Image
                 src={
                   `https://365trends.tj/api/static/images/pages/${el.bannerUrl}` ??
@@ -28,6 +28,7 @@ const PagesCard = ({ data }: { data: Pages[] }) => {
                 }
                 alt={`${el.title} logo`}
                 fill
+                className='object-cover'
               />
             </div>
             <div className='space-y-2'>

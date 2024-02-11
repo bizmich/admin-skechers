@@ -19,16 +19,17 @@ const SliderCard = ({ data }: { data: Slider[] }) => {
           <CardHeader>
             <CardTitle>{el.title}</CardTitle>
           </CardHeader>
-          <CardContent className='flex justify-center'>
-            <Image
-              src={
-                `https://365trends.tj/api/static/images/sliders/${el.imageUrl}` ??
-                ''
-              }
-              alt={`${el.title} logo`}
-              width={250}
-              height={250}
-            />
+          <CardContent className='flex justify-center '>
+            <div className='h-44 relative w-full'>
+              <Image
+                src={
+                  `https://365trends.tj/api/static/images/sliders/${el.imageUrl}` ??
+                  ''
+                }
+                alt={`${el.title} logo`}
+                fill
+              />
+            </div>
           </CardContent>
           <CardFooter className='space-x-3'>
             <Button variant='secondary' className='w-full'>

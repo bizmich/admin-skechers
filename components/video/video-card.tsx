@@ -21,15 +21,16 @@ const VideoCard = ({ data }: { data: Video[] }) => {
             <CardTitle>{el.title}</CardTitle>
           </CardHeader>
           <CardContent className='flex justify-center'>
-            <Image
-              src={
-                `https://365trends.tj/api/static/images/videos/${el.thumbnailUrl}` ??
-                ''
-              }
-              alt={`${el.title} logo`}
-              width={250}
-              height={250}
-            />
+            <div className='h-44 relative w-full'>
+              <Image
+                src={
+                  `https://365trends.tj/api/static/images/videos/${el.thumbnailUrl}` ??
+                  ''
+                }
+                alt={`${el.title} logo`}
+                fill
+              />
+            </div>
           </CardContent>
           <CardFooter className='space-x-3'>
             <Button variant='secondary' className='w-full'>
