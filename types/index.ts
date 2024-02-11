@@ -102,3 +102,54 @@ export interface Settings extends EditSettingsItems {}
 export interface SingleProduct extends Product {
   brendId: string;
 }
+
+export interface Orders {
+  items: OrderItem[];
+  total: number;
+  take: number;
+  skip: number;
+}
+
+export interface OrderItem {
+  id: string;
+  createdAt: string;
+  orderNo: string;
+  status: string;
+  orderSum: string;
+}
+
+export interface SingleOrder {
+  id: string;
+  status: string;
+  createdAt: string;
+  orderNo: string;
+  orderSum: string;
+  user: SingleOrderUser;
+  address: string;
+  orderItems: SingleOrderItem[];
+}
+
+export interface SingleOrderUser {
+  id: string;
+  name: string;
+}
+
+export interface SingleOrderItem {
+  id: string;
+  productId: string;
+  article: string;
+  productTitle: string;
+  productDescription: string;
+  productBrend: string;
+  productBrendId: string;
+  productCategoryId: string;
+  productCategory: string;
+  productColorId: string;
+  imageUrl: string;
+  productColorName: string;
+  soldPrice: string;
+  productSizeId: string;
+  productSize: string;
+  quantity: number;
+  amount: number;
+}

@@ -501,6 +501,26 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/pages/footer-logo`)
       .then((response) => response.data);
   };
+
+  // Orders
+
+  getOrders = async <G>(params: AxiosRequestConfig) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/orders`, undefined, params)
+      .then((response) => response.data);
+  };
+
+  getSingleOrder = async <G>(id: string) => {
+    return await axiosInstance
+      .get<G>(`/dashboard/orders/${id}`)
+      .then((response) => response.data);
+  };
+
+  updateOrderStatus = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/orders/${id}/proceed`, form)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

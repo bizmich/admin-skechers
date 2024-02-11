@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
+import { parseISO, format } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -54,3 +55,29 @@ export function truncate(str: string, length: number) {
   if (!str) return null;
   return str.length > length ? `${str.substring(0, length)}...` : str;
 }
+
+export function formatDate(dateString: string) {
+  if (!dateString) return;
+  const outputFormat = 'dd.MM.yyyy HH:mm';
+
+  const parsedDate = parseISO(dateString);
+  const formattedDate = format(parsedDate, outputFormat);
+
+  return formattedDate;
+}
+
+export const getStatus = (status: string) => {
+  switch (status) {
+    case 'NEW_ORDER':
+      return 'Новый заказ';
+    case 'PROCESSING':
+      return 'В процессе';
+    case 'DELIVERED':
+      return 'Доставлен';
+    case 'REJECTED':
+      return 'Отклонен';
+
+    default:
+      return 'Не указан';
+  }
+};

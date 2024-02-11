@@ -19,14 +19,14 @@ const Pagination = ({
   if (!pageCount && pageCount === 0) return null;
 
   return (
-    <div className='flex w-full flex-wrap justify-center gap-10 md:justify-between'>
+    <div className='flex w-full flex-wrap justify-center gap-10'>
       <PaginationButton
         pageCount={Math.ceil(Number(pageCount) / Number(perPage))}
         page={String(page)}
         perPage={perPage}
         createQueryString={createQueryString}
       />
-     
+      {/* <ItemsPerPage /> */}
     </div>
   );
 };
