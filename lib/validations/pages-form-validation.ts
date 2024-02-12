@@ -4,12 +4,7 @@ export const editPagesFormSchema = z.object({
   id: z.string().optional(),
   sortOrder: z.number(),
   title: z.string(),
-  slug: z
-    .string()
-    .trim()
-    .refine((val) => !val.includes(' '), {
-      message: 'Без пробелов',
-    }),
+  slug: z.string().optional(),
   description: z.string(),
   bannerUrl: z.string().optional().nullish(),
   active: z.boolean().default(false),

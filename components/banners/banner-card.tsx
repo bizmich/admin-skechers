@@ -35,7 +35,7 @@ const BannerCard = ({ data }: { data: Banner[] }) => {
             <Button variant='secondary' className='w-full'>
               <Link href={`/banners/${el.id}`}>Изменить</Link>
             </Button>
-            <DeleteBannerAlert id={el.id ?? ''} />
+            {/* <DeleteBannerAlert id={el.id ?? ''} /> */}
           </CardFooter>
         </Card>
       ))}

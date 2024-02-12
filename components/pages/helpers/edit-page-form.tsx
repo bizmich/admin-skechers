@@ -86,20 +86,6 @@ const EditPageForm = ({ id }: { id: string }) => {
           )}
         />
         <FormField
-          disabled
-          control={form.control}
-          name='slug'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Slug (без пробел)</FormLabel>
-              <FormControl>
-                <Input placeholder='Slug' pattern='[^\s]+' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
           control={form.control}
           name='active'
           render={({ field }) => (

@@ -106,6 +106,7 @@ const EditBannerForm = ({ id }: { id: string }) => {
         <FormField
           control={form.control}
           name='page'
+          disabled
           render={({ field }) => (
             <FormItem>
               <FormLabel>Страница</FormLabel>
@@ -166,7 +167,7 @@ const EditBannerForm = ({ id }: { id: string }) => {
           )}
         />
         <FormItem>
-          <FormLabel>Логотип</FormLabel>
+          <FormLabel>Баннер</FormLabel>
           <FormControl>
             {data?.imageUrl ? (
               <div className='relative w-44 h-32'>

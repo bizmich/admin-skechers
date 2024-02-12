@@ -5,7 +5,7 @@ export const editBannerFormSchema = z.object({
   sortOrder: z.number(),
   title: z.string(),
   linkTo: z.string(),
-  page: z.string(),
+  page: z.string().optional(),
   imageUrl: z.string().optional().nullish(),
   active: z.boolean(),
 });
