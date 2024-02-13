@@ -23,7 +23,7 @@ const SingleUserTable = ({ id }: { id: string }) => {
         <div className='space-y-5 border p-10'>
           <div>
             <p className='text-sm text-primary font-semibold'>Имя</p>
-            <p>{data?.name}</p>
+            <p>{data?.name || 'Не указан'}</p>
           </div>
           <div>
             <p className='text-sm text-primary font-semibold'>Роль</p>
