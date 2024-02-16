@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import Dropzone, { FileWithPreview } from '@/components/drop-zone';
+import EditorInput from '@/components/editor-input';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
@@ -24,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { editPagesFormSchema } from '@/lib/validations/pages-form-validation';
 import useDeletePageBannerImage from '@/services/hooks/pages-hooks/useDeletePageBannerImage';
 import useSinglePage from '@/services/hooks/pages-hooks/useSinglePage';
@@ -71,7 +71,7 @@ const EditPageForm = ({ id }: { id: string }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-2/3 space-y-6'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className=' space-y-6'>
         <FormField
           control={form.control}
           name='title'
@@ -196,7 +196,7 @@ const EditPageForm = ({ id }: { id: string }) => {
             <FormItem>
               <FormLabel>Описание</FormLabel>
               <FormControl>
-                <Textarea placeholder='Описание' {...field} />
+                <EditorInput {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

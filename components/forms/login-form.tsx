@@ -71,7 +71,7 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Логин</FormLabel>
               <FormControl>
-                <Input placeholder='Логин' {...field} />
+                <Input placeholder='Логин' className='w-full' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
