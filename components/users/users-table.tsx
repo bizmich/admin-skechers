@@ -11,12 +11,18 @@ import {
 import useBlockUser from '@/services/hooks/users-hooks/useBlockUser';
 import useUnblockUser from '@/services/hooks/users-hooks/useUnblockUser';
 import useUsers from '@/services/hooks/users-hooks/useUsers';
-import { IconSearch } from '@tabler/icons-react';
+import { IconDots, IconSearch } from '@tabler/icons-react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Button } from '../ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Switch } from '../ui/switch';
+import DeleteUserAlert from './helpers/delete-user-alert';
+import EditUserAlert from './helpers/edit-user/edit-user-form-alert';
 
 export default function UsersTable() {
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const keyword = searchParams.get('keyword') ?? null;
   const role = searchParams?.get('role') ?? null;
@@ -26,7 +32,7 @@ export default function UsersTable() {
 
   return (
     <Table>
-      <TableCaption>{data?.length === 0 && 'Не найдено'}</TableCaption>
+      <TableCaption>{data?.items.length === 0 && 'Не найдено'}</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Имя</TableHead>
@@ -35,11 +41,12 @@ export default function UsersTable() {
           <TableHead>Активный</TableHead>
           <TableHead className='text-center'>Кол. заказов</TableHead>
           <TableHead className='text-right'>Просмотр</TableHead>
+          <TableHead className='text-right'>Действия</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data &&
-          data?.map((user) => (
+          data.items?.map((user) => (
             <TableRow key={user.id}>
               <TableCell className='font-medium'>
                 {user.name || 'Не указан'}
@@ -69,6 +76,29 @@ export default function UsersTable() {
                 <Link href={`/users/${user.id}`}>
                   <IconSearch className='mr-0 ml-auto' />
                 </Link>
+              </TableCell>
+              <TableCell className='text-right'>
+                <Popover>
+                  <PopoverTrigger
+                    disabled={session?.user?.user?.role !== 'ADMINISTRATOR'}
+                    asChild
+                  >
+                    <Button
+                      variant='ghost'
+                      size='icon'
+                      className='rounded-full'
+                    >
+                      <IconDots className='cursor-pointer' />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    align='end'
+                    className='w-auto flex flex-col p-2'
+                  >
+                    <EditUserAlert id={user.id} />
+                    <DeleteUserAlert id={user.id} />
+                  </PopoverContent>
+                </Popover>
               </TableCell>
             </TableRow>
           ))}

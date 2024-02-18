@@ -524,6 +524,18 @@ class APIClient {
       .then((response) => response.data);
   };
 
+  createUser = async <G, P>(form: P) => {
+    return await axiosInstance
+      .post<G>(`/dashboard/users`, form)
+      .then((response) => response.data);
+  };
+
+  editUser = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/users/${id}`, form)
+      .then((response) => response.data);
+  };
+
   updateOrderStatus = async <G, P>(id: string, form: P) => {
     return await axiosInstance
       .patch<G>(`/dashboard/orders/${id}/proceed`, form)
@@ -534,7 +546,7 @@ class APIClient {
 
   getUsers = async <G>(params: AxiosRequestConfig) => {
     return await axiosInstance
-      .get<G>(`/dashboard/user`, params)
+      .get<G>(`/dashboard/users`, params)
       .then((response) => response.data);
   };
 
@@ -553,6 +565,12 @@ class APIClient {
   unblockUser = async <G, P>(id: string) => {
     return await axiosInstance
       .patch<G>(`/dashboard/users/${id}/unblock`)
+      .then((response) => response.data);
+  };
+
+  deleteUser = async <G>(id: string) => {
+    return await axiosInstance
+      .delete<G>(`/dashboard/users/${id}`)
       .then((response) => response.data);
   };
 }

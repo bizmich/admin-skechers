@@ -5,6 +5,15 @@ import { EditSettingsItems } from '@/lib/validations/settings-form-validation';
 import { EditShopsItems } from '@/lib/validations/shops-form-validation';
 import { EditSliderItems } from '@/lib/validations/slider-form-validation';
 import { EditVideoItems } from '@/lib/validations/video-form-validation';
+import { Users } from 'lucide-react';
+
+export interface CustomError extends Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
 
 export interface Navigation {
   id: string;
@@ -152,6 +161,13 @@ export interface SingleOrderItem {
   productSize: string;
   quantity: number;
   amount: number;
+}
+
+export interface UsersFetchResponse {
+  skip: number;
+  take: number;
+  total: number;
+  items: Users[];
 }
 
 export interface Users {
