@@ -26,7 +26,7 @@ const SlugPage = ({ id }: { id: string }) => {
           <div>{data && <SingleProductTable data={data} />}</div>
           <div>
             <ContainerTitle className='text-xl'>Цвета</ContainerTitle>
-            {data && <ProductColorTable data={data?.colors} />}
+            {data && <ProductColorTable data={data?.colors} productId={id} />}
           </div>
         </div>
       </ContainerContent>

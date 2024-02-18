@@ -1,3 +1,4 @@
+import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -8,27 +9,35 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { getImageUrl } from '@/services/getImagesUrl';
-import { SingleCategory } from '@/services/hooks/categories-hooks/useSingleCategory';
+import useDeleteCategoryBannerImage from '@/services/hooks/categories-hooks/useDeleteCategoryBannerImage';
+import useDeleteCategoryImage from '@/services/hooks/categories-hooks/useDeleteCategoryImage';
 import useUpdateCategory from '@/services/hooks/categories-hooks/useUpdateCategory';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import UploadCategoryBannerImage from '../upload-category-banner-image';
 import UploadCategoryImage from '../upload-category-image';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import { Icons } from '@/components/icons';
-import useDeleteCategoryImage from '@/services/hooks/categories-hooks/useDeleteCategoryImage';
-import useDeleteCategoryBannerImage from '@/services/hooks/categories-hooks/useDeleteCategoryBannerImage';
 
 export const categoryEditFormSchema = z.object({
   name: z.string(),
   href: z.string(),
   parentId: z.string().nullable(),
   active: z.boolean(),
+  isPopular: z.boolean(),
+  sortOrder: z.union([z.string(), z.number()]),
   showInHome: z.boolean(),
   bannerUrl: z.string().nullish(),
   imageUrlForHome: z.string().nullish(),
@@ -51,6 +60,8 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
       showInHome: true,
       bannerUrl: null,
       imageUrlForHome: data.imageUrlForHome ?? '',
+      isPopular: false,
+      sortOrder: '',
     },
     resolver: zodResolver(categoryEditFormSchema),
   });
@@ -143,6 +154,55 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name='isPopular'
+            render={({ field }) => (
+              <FormItem className='grid grid-cols-3 items-center'>
+                <FormLabel>Показать в популярных:</FormLabel>
+                <FormControl>
+                  <Input
+                    type='checkbox'
+                    checked={field.value}
+                    onChange={(event) => field.onChange(event.target.checked)}
+                    className='size-4'
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='sortOrder'
+            render={({ field }) => (
+              <FormItem className='grid grid-cols-3 items-center'>
+                <FormLabel>Сортировка:</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={(e) => field.onChange(+e)}
+                    defaultValue={String(field.value)}
+                    value={String(field.value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder='Выберите порядок' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value='1'>1</SelectItem>
+                        <SelectItem value='2'>2</SelectItem>
+                        <SelectItem value='3'>3</SelectItem>
+                        <SelectItem value='4'>4</SelectItem>
+                        <SelectItem value='5'>5</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name='imageUrlForHome'
@@ -184,11 +244,12 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
                 <FormLabel>Фото баннера:</FormLabel>
                 <FormControl>
                   {data.bannerUrl ? (
-                    <div className='relative w-44 h-32'>
+                    <div className='relative col-span-2 w-full h-32'>
                       <Image
                         src={getImageUrl.getCategoryImages(data.bannerUrl)}
                         alt='image'
                         fill
+                        className='object-cover'
                       />
                       {!deleteBannerImage.isPending ? (
                         <Icons.trash

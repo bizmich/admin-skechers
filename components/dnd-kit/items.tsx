@@ -1,8 +1,6 @@
-import { cn } from '@/lib/utils';
 import { getImageUrl } from '@/services/getImagesUrl';
 import { CSSProperties, forwardRef, HTMLAttributes } from 'react';
 import BlurredImage from '../BlurredImage';
-import { Icons } from '../icons';
 import { TItem } from './dnd-kit';
 
 type Props = {

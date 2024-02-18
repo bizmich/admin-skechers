@@ -40,6 +40,7 @@ const ProductFilter = () => {
       keyword: '',
       technologyIds: [],
       sizeZero: false,
+      archived: false,
     },
     resolver: zodResolver(filterFormSchema),
   });
@@ -145,6 +146,7 @@ const ProductFilter = () => {
               {...field}
               type='text'
               placeholder='Название, артикул, ключевое слово'
+              className='w-full'
             />
           )}
         />
@@ -161,6 +163,22 @@ const ProductFilter = () => {
                 className='size-4'
               />
               <FormLabel>Все нулевые размеры</FormLabel>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name='archived'
+          render={({ field }) => (
+            <FormItem className='flex items-center space-y-0 gap-2'>
+              <Input
+                checked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                type='checkbox'
+                className='size-4'
+              />
+              <FormLabel>Архив</FormLabel>
             </FormItem>
           )}
         />

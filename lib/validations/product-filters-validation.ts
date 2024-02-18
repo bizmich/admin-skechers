@@ -9,6 +9,7 @@ export const filterFormSchema = z.object({
   keyword: z.string().optional(),
   skip: z.string().optional(),
   sizeZero: z.boolean().optional(),
+  archived: z.boolean().optional(),
 });
 
 export type filterFormTypes = z.infer<typeof filterFormSchema>;

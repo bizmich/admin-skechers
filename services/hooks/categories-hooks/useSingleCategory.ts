@@ -11,6 +11,7 @@ export interface SingleCategory {
   imageUrlForHome: string;
   bannerUrl: null | string;
   showInHome: boolean;
+  isPopular: boolean;
 }
 
 export default function useSingleCategory(

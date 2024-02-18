@@ -182,11 +182,12 @@ const EditBrandForm = ({ id }: { id: string }) => {
           <FormControl>
             <FormControl>
               {data?.bannerUrl ? (
-                <div className='relative w-44 h-32'>
+                <div className='relative w-full h-32'>
                   <Image
                     src={`https://365trends.tj/api/static/images/brends/${data.bannerUrl}`}
                     alt='image'
                     fill
+                    className='object-cover'
                   />
                   {!deleteBanner.isPending ? (
                     <Icons.trash

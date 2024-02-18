@@ -64,7 +64,12 @@ const UsersFilter = () => {
           control={form.control}
           name='keyword'
           render={({ field }) => (
-            <Input {...field} type='text' placeholder='Поиск по имени' />
+            <Input
+              {...field}
+              type='text'
+              placeholder='Поиск по имени'
+              className='w-full'
+            />
           )}
         />
         <FormField
@@ -85,6 +90,7 @@ const UsersFilter = () => {
                 <SelectContent>
                   <SelectItem value='CUSTOMER'>Клиент</SelectItem>
                   <SelectItem value='ADMINISTRATOR'>Администратор</SelectItem>
+                  <SelectItem value='MODERATOR'>Модерато</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

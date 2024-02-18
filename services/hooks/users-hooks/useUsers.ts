@@ -11,9 +11,11 @@ export default function useUsers({ keyword, role }: UsersPost) {
   return useQuery<Users[]>({
     queryKey: ['users', keyword, role],
     queryFn: () =>
-      apiService.getUsers<Users[], UsersPost>({
-        keyword,
-        role,
+      apiService.getUsers<Users[]>({
+        params: {
+          keyword,
+          role,
+        },
       }),
   });
 }

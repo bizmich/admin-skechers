@@ -36,7 +36,7 @@ export const getProductFilter = (data: any) => {
         }
       }
 
-      if (key === 'sizeZero') {
+      if (key === 'sizeZero' || key === 'archived') {
         if (queries[key][0] === 'true') {
           queries[key] = true;
         } else {

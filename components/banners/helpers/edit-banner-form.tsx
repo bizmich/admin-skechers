@@ -170,11 +170,12 @@ const EditBannerForm = ({ id }: { id: string }) => {
           <FormLabel>Баннер</FormLabel>
           <FormControl>
             {data?.imageUrl ? (
-              <div className='relative w-44 h-32'>
+              <div className='relative w-full h-32'>
                 <Image
                   src={`https://365trends.tj/api/static/images/banners/${data.imageUrl}`}
                   alt='image'
                   fill
+                  className='object-cover'
                 />
                 {!deleteLogo.isPending ? (
                   <Icons.trash

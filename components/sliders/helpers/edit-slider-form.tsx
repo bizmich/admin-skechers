@@ -74,7 +74,7 @@ const EditSliderForm = ({ id }: { id: string }) => {
 
           onSubmit(e);
         })}
-        className='w-2/3 space-y-6'
+        className='w-full space-y-6'
       >
         <FormField
           control={form.control}
@@ -155,11 +155,12 @@ const EditSliderForm = ({ id }: { id: string }) => {
           <FormLabel>Баннер</FormLabel>
           <FormControl>
             {data?.imageUrl ? (
-              <div className='relative w-44 h-32'>
+              <div className='relative w-full aspect-[16/7]'>
                 <Image
                   src={`https://365trends.tj/api/static/images/sliders/${data.imageUrl}`}
                   alt='image'
                   fill
+                  className='object-cover'
                 />
                 {!deleteLogo.isPending ? (
                   <Icons.trash

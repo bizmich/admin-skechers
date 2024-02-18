@@ -21,7 +21,7 @@ const EditProductAlert = (props: Partial<Product>) => {
           <Icons.edit className='size-5' />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className='max-w-2xl'>
+      <AlertDialogContent className='max-w-7xl'>
         <AlertDialogHeader>
           <AlertDialogTitle>Изменить товар</AlertDialogTitle>
           <EditSingleProductForm data={props} />

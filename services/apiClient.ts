@@ -109,6 +109,7 @@ class APIClient {
       .delete<G>(`/dashboard/static/images/product-galleries/${id}`)
       .then((response) => response.data);
   };
+
   updateColorImageProduct = async <G>(form: UpdateProductColorImage) => {
     return await axiosInstance
       .patch<G>(`/dashboard/product-galleries/${form.id}`, {
@@ -116,6 +117,13 @@ class APIClient {
       })
       .then((response) => response.data);
   };
+
+  updateColorProductOrder = async <G, P>(id: string, form: P) => {
+    return await axiosInstance
+      .patch<G>(`/dashboard/products/${id}/colors-order`, form)
+      .then((response) => response.data);
+  };
+
   updateSingleProduct = async <G>(id: string, form: any) => {
     return await axiosInstance
       .patch<G>(`/dashboard/products/${id}`, { ...form })
@@ -524,9 +532,9 @@ class APIClient {
 
   // users
 
-  getUsers = async <G, P>(form: P) => {
+  getUsers = async <G>(params: AxiosRequestConfig) => {
     return await axiosInstance
-      .post<G>(`/dashboard/user`, form)
+      .get<G>(`/dashboard/user`, params)
       .then((response) => response.data);
   };
 
