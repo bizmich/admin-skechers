@@ -37,7 +37,7 @@ export const categoryEditFormSchema = z.object({
   parentId: z.string().nullable(),
   active: z.boolean(),
   isPopular: z.boolean(),
-  sortOrder: z.union([z.string(), z.number()]),
+  sortOrder: z.union([z.string(), z.number()]).transform((value) => +value),
   showInHome: z.boolean(),
   bannerUrl: z.string().nullish(),
   imageUrlForHome: z.string().nullish(),
@@ -61,7 +61,6 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
       bannerUrl: null,
       imageUrlForHome: data.imageUrlForHome ?? '',
       isPopular: false,
-      sortOrder: '',
     },
     resolver: zodResolver(categoryEditFormSchema),
   });
