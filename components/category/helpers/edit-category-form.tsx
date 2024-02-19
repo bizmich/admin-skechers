@@ -180,24 +180,7 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
               <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Сортировка:</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={(e) => field.onChange(+e)}
-                    defaultValue={String(field.value)}
-                    value={String(field.value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder='Выберите порядок' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value='1'>1</SelectItem>
-                        <SelectItem value='2'>2</SelectItem>
-                        <SelectItem value='3'>3</SelectItem>
-                        <SelectItem value='4'>4</SelectItem>
-                        <SelectItem value='5'>5</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <Input type='number' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

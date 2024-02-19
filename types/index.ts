@@ -47,6 +47,7 @@ export interface Product {
   title: string;
   description: string;
   newProduct: boolean;
+  archived: boolean;
   hit: boolean;
   viewedQuantity: number;
   soldQuantity: number;

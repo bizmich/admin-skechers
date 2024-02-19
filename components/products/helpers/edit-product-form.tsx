@@ -27,6 +27,7 @@ export const singleProductEditFormSchema = z.object({
   newProduct: z.boolean().nullish().optional(),
   hit: z.boolean().nullish().optional(),
   active: z.boolean().nullish().optional(),
+  archived: z.boolean().nullish().optional(),
   categoryIds: z.array(z.string()).optional(),
   technologyIds: z.array(z.string()).optional(),
 });
@@ -41,6 +42,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
     newProduct,
     categories,
     technologies,
+    archived,
     id,
   } = data;
 
@@ -50,6 +52,7 @@ const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
       description: description,
       brendId: brendId,
       active: active,
+      archived: archived,
       hit: hit,
       newProduct: newProduct,
       technologyIds: technologies?.map((tech) => tech.id),
@@ -135,6 +138,24 @@ const EditSingleProductForm = ({ data }: { data: Partial<SingleProduct> }) => {
               render={({ field }) => (
                 <FormItem className='grid grid-cols-2 items-center'>
                   <FormLabel>Активный:</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='checkbox'
+                      defaultChecked={field.value || false}
+                      onChange={(event) => field.onChange(event.target.checked)}
+                      className='size-4'
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='archived'
+              render={({ field }) => (
+                <FormItem className='grid grid-cols-2 items-center'>
+                  <FormLabel>Заархивировать:</FormLabel>
                   <FormControl>
                     <Input
                       type='checkbox'
