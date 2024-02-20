@@ -1,12 +1,11 @@
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { Icons } from './icons';
 
 const Logo = ({ className }: { className?: string }) => {
   return (
     <Link href='/' className={cn('text-5xl font-bold', className)}>
-      <Image src='/logo_skechers.svg' width={200} height={250} alt='logo' />
+      <Icons.logo className='text-blue-600' />
     </Link>
   );
 };

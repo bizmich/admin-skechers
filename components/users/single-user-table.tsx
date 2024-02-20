@@ -13,6 +13,8 @@ import { formatDate, getStatus } from '@/lib/utils';
 
 import useSingleUser from '@/services/hooks/users-hooks/useSingleUser';
 import Link from 'next/link';
+import { Icons } from '../icons';
+import { IconSearch } from '@tabler/icons-react';
 
 const SingleUserTable = ({ id }: { id: string }) => {
   const { data } = useSingleUser(id);
@@ -64,6 +66,9 @@ const SingleUserTable = ({ id }: { id: string }) => {
                   Цена доставки
                 </TableHead>
                 <TableHead className='font-bold text-primary'>Всего</TableHead>
+                <TableHead className='font-bold text-primary'>
+                  Просмотр
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -79,6 +84,11 @@ const SingleUserTable = ({ id }: { id: string }) => {
                     <TableCell>{getStatus(order.status ?? '')}</TableCell>
                     <TableCell>{order.deliveryPrice}</TableCell>
                     <TableCell>{order.orderSum}</TableCell>
+                    <TableCell className='text-right'>
+                      <Link href={`/orders/${order.id}`}>
+                        <IconSearch />
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

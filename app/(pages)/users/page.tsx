@@ -16,7 +16,7 @@ const UsersPage = () => {
     <Container>
       <ContainerTitle className='flex justify-between items-center'>
         Пользователи
-        {data?.user?.user?.role !== 'ADMINISTRATOR' && <AddUserAlert />}
+        {data?.user?.user?.role === 'ADMINISTRATOR' && <AddUserAlert />}
       </ContainerTitle>
       <ContainerFilters>
         <UsersFilter />
