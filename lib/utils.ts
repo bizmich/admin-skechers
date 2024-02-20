@@ -81,3 +81,16 @@ export const getStatus = (status: string) => {
       return 'Не указан';
   }
 };
+
+export const getRole = (status: string) => {
+  switch (status) {
+    case 'MODERATOR':
+      return 'Модератор';
+    case 'ADMINISTRATOR':
+      return 'Администратор';
+    case 'CUSTOMER':
+      return 'Клиент';
+    default:
+      return 'Не указан';
+  }
+};

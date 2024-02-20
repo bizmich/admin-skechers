@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { getRole } from '@/lib/utils';
 import useBlockUser from '@/services/hooks/users-hooks/useBlockUser';
 import useUnblockUser from '@/services/hooks/users-hooks/useUnblockUser';
 import useUsers from '@/services/hooks/users-hooks/useUsers';
@@ -52,9 +53,7 @@ export default function UsersTable() {
                 {user.name || 'Не указан'}
               </TableCell>
               <TableCell>{user.phone}</TableCell>
-              <TableCell>
-                {user.role == 'CUSTOMER' ? 'Клиент' : 'Администратор'}
-              </TableCell>
+              <TableCell>{getRole(user.role)}</TableCell>
               <TableCell title={user.active ? 'Активный' : ' Не активный'}>
                 <Switch
                   defaultChecked={user.active}

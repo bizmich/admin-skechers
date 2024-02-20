@@ -81,12 +81,6 @@ export const siteConfig = {
         },
       ],
     },
-    {
-      id: '4',
-      icon: 'user',
-      name: 'Администраторы',
-      href: '/administrators',
-    },
   ] satisfies Navigation[],
   settings: {
     id: '10',

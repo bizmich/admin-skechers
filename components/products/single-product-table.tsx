@@ -1,4 +1,3 @@
-import { truncate } from '@/lib/utils';
 import { SingleProduct } from '@/types';
 
 const SingleProductTable = ({ data }: { data: SingleProduct }) => {
@@ -9,10 +8,10 @@ const SingleProductTable = ({ data }: { data: SingleProduct }) => {
           <div>Название</div>
           <div>{data.title}</div>
         </div>
-        <div className='grid grid-cols-2 gap-5'>
+        {/* <div className='grid grid-cols-2 gap-5'>
           <div>Описание</div>
           <div className='truncate'>{truncate(data.description, 50)}</div>
-        </div>
+        </div> */}
         <div className='grid grid-cols-2 gap-5'>
           <div>Бренд</div>
           <div className='truncate'>{data.brendId}</div>

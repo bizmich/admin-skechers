@@ -57,9 +57,13 @@ const EditUserForm = ({ id }: { id: string }) => {
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Название</FormLabel>
+                <FormLabel>Имя пользователя</FormLabel>
                 <FormControl>
-                  <Input {...field} type='text' placeholder='Название' />
+                  <Input
+                    {...field}
+                    type='text'
+                    placeholder='Имя пользователя'
+                  />
                 </FormControl>
 
                 <FormMessage />

@@ -90,7 +90,7 @@ const UsersFilter = () => {
                 <SelectContent>
                   <SelectItem value='CUSTOMER'>Клиент</SelectItem>
                   <SelectItem value='ADMINISTRATOR'>Администратор</SelectItem>
-                  <SelectItem value='MODERATOR'>Модерато</SelectItem>
+                  <SelectItem value='MODERATOR'>Модератор</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

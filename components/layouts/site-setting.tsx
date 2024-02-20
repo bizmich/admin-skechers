@@ -7,7 +7,7 @@ const SiteSetting = () => {
   const { settings } = siteConfig;
   const Icon = Icons[settings.icon];
   return (
-    <Button className='w-full' asChild variant='ghost'>
+    <Button className='w-full pl-0 justify-start' asChild variant='ghost'>
       <Link href='/settings'>
         <Icon className='h-5 w-5' />
         {settings.name}

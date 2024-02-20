@@ -500,13 +500,13 @@ class APIClient {
 
   deleteSettingMainLogo = async <G>() => {
     return await axiosInstance
-      .delete<G>(`/dashboard/static/images/pages/logo`)
+      .delete<G>(`/dashboard/static/images/settings/logo`)
       .then((response) => response.data);
   };
 
   deleteSettingFooterLogo = async <G>() => {
     return await axiosInstance
-      .delete<G>(`/dashboard/static/images/pages/footer-logo`)
+      .delete<G>(`/dashboard/static/images/settings/footer-logo`)
       .then((response) => response.data);
   };
 

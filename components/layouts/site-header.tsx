@@ -1,9 +1,8 @@
 'use client';
+import { useToggleSideNav } from '@/state-management/toggle-side-nav';
 import { IconMenu2 } from '@tabler/icons-react';
-import Notifications from '../notifications';
 import SignOut from '../sign-out';
 import { Button } from '../ui/button';
-import { useToggleSideNav } from '@/state-management/toggle-side-nav';
 
 const Header = () => {
   const { open, setOpen } = useToggleSideNav();
@@ -12,7 +11,7 @@ const Header = () => {
       <div>
         <div className='flex items-center gap-2'>
           {/* <ModeToggle /> */}
-          <Notifications />
+
           <SignOut />
           <Button
             type='button'
