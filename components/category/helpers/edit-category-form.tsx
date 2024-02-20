@@ -37,7 +37,7 @@ export const categoryEditFormSchema = z.object({
   parentId: z.string().nullable(),
   active: z.boolean(),
   isPopular: z.boolean(),
-  sortOrder: z.union([z.string(), z.number()]),
+  sortOrder: z.union([z.string(), z.number()]).transform((value) => +value),
   showInHome: z.boolean(),
   bannerUrl: z.string().nullish(),
   imageUrlForHome: z.string().nullish(),
@@ -61,7 +61,6 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
       bannerUrl: null,
       imageUrlForHome: data.imageUrlForHome ?? '',
       isPopular: false,
-      sortOrder: '',
     },
     resolver: zodResolver(categoryEditFormSchema),
   });
@@ -180,24 +179,7 @@ const EditCategoryForm = ({ data }: { data: EditCategoryFormProps }) => {
               <FormItem className='grid grid-cols-3 items-center'>
                 <FormLabel>Сортировка:</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={(e) => field.onChange(+e)}
-                    defaultValue={String(field.value)}
-                    value={String(field.value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder='Выберите порядок' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value='1'>1</SelectItem>
-                        <SelectItem value='2'>2</SelectItem>
-                        <SelectItem value='3'>3</SelectItem>
-                        <SelectItem value='4'>4</SelectItem>
-                        <SelectItem value='5'>5</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <Input type='number' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
