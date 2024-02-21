@@ -42,7 +42,9 @@ export default function UsersTable() {
           <TableHead>Активный</TableHead>
           <TableHead className='text-center'>Кол. заказов</TableHead>
           <TableHead className='text-right'>Просмотр</TableHead>
-          <TableHead className='text-right'>Действия</TableHead>
+          {session?.user?.user?.role === 'ADMINISTRATOR' && (
+            <TableHead className='text-right'>Действия</TableHead>
+          )}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -76,29 +78,28 @@ export default function UsersTable() {
                   <IconSearch className='mr-0 ml-auto' />
                 </Link>
               </TableCell>
-              <TableCell className='text-right'>
-                <Popover>
-                  <PopoverTrigger
-                    disabled={session?.user?.user?.role !== 'ADMINISTRATOR'}
-                    asChild
-                  >
-                    <Button
-                      variant='ghost'
-                      size='icon'
-                      className='rounded-full'
+              {session?.user?.user?.role === 'ADMINISTRATOR' && (
+                <TableCell className='text-right'>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant='ghost'
+                        size='icon'
+                        className='rounded-full'
+                      >
+                        <IconDots className='cursor-pointer' />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      align='end'
+                      className='w-auto flex flex-col p-2'
                     >
-                      <IconDots className='cursor-pointer' />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    align='end'
-                    className='w-auto flex flex-col p-2'
-                  >
-                    <EditUserAlert id={user.id} />
-                    <DeleteUserAlert id={user.id} />
-                  </PopoverContent>
-                </Popover>
-              </TableCell>
+                      <EditUserAlert id={user.id} />
+                      <DeleteUserAlert id={user.id} />
+                    </PopoverContent>
+                  </Popover>
+                </TableCell>
+              )}
             </TableRow>
           ))}
       </TableBody>
