@@ -10,8 +10,8 @@ export const editSettingsFormSchema = z.object({
   instagramLink: z.string().optional(),
   whatsappLink: z.string().optional(),
   telegramLink: z.string().optional(),
-  freeDeliveryFrom: z.string().transform((val) => Number(val)),
-  deliveryPrice: z.string().transform((val) => Number(val)),
+  freeDeliveryFrom: z.union([z.string(), z.number()]),
+  deliveryPrice: z.union([z.string(), z.number()]),
 });
 
 export interface EditSettingsItems

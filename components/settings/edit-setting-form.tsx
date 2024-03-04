@@ -45,8 +45,8 @@ const EditSettingForm = () => {
     defaultValues: {
       companyDescription: '',
       companyName: '',
-      deliveryPrice: '' || 0,
-      freeDeliveryFrom: '' || 0,
+      deliveryPrice: '',
+      freeDeliveryFrom: '',
       facebookLink: '',
       instagramLink: '',
       logoOriginalUrl: '',
@@ -57,7 +57,7 @@ const EditSettingForm = () => {
   });
 
   function onSubmit(data: z.infer<typeof editSettingsFormSchema>) {
-    updateSettings.mutate(data);
+    updateSettings.mutate({...data, freeDeliveryFrom: +data.freeDeliveryFrom, deliveryPrice: +data.deliveryPrice});
   }
 
   useEffect(() => {
