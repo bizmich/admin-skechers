@@ -24,7 +24,7 @@ export default function OrdersTable() {
   const createDateTo = searchParams?.get('createDateTo') ?? null;
   const status = searchParams?.get('status') ?? null;
 
-  const { data, isLoading } = useOrders({
+  const { data } = useOrders({
     form: {
       createdDateFrom,
       createDateTo,

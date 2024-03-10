@@ -5,16 +5,21 @@ import apiService from '../../apiService';
 export interface UsersPost {
   keyword: string | null;
   role: string | null;
+  page: string;
+  perPage:string
 }
 
-export default function useUsers({ keyword, role }: UsersPost) {
+export default function useUsers({ keyword, role,page,perPage }: UsersPost) {
   return useQuery<UsersFetchResponse>({
-    queryKey: ['users', keyword, role],
+    queryKey: ['users', keyword, role, page],
     queryFn: () =>
       apiService.getUsers<UsersFetchResponse>({
         params: {
           keyword,
           role,
+          page,
+          perPage,
+          skip: (Number(page) - 1) * Number(perPage),
         },
       }),
   });

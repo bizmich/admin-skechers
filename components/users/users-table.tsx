@@ -21,19 +21,49 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Switch } from '../ui/switch';
 import DeleteUserAlert from './helpers/delete-user-alert';
 import EditUserAlert from './helpers/edit-user/edit-user-form-alert';
+import { useCallback } from 'react';
+import Pagination from '../Pagination';
 
 export default function UsersTable() {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
+  const page = searchParams.get('page') ?? '1';
+  const perPage = searchParams?.get('per_page') ?? '10';
   const keyword = searchParams.get('keyword') ?? null;
   const role = searchParams?.get('role') ?? null;
-  const { data } = useUsers({ keyword, role });
+  const { data } = useUsers({ keyword, role,page,perPage });
   const blockUser = useBlockUser();
   const unblockUser = useUnblockUser();
 
+  const createQueryString = useCallback(
+    (params: Record<string, string | number | null>) => {
+      const newSearchParams = new URLSearchParams(searchParams?.toString());
+
+      for (const [key, value] of Object.entries(params)) {
+        if (value === null) {
+          newSearchParams.delete(key);
+        } else {
+          newSearchParams.set(key, String(value));
+        }
+      }
+
+      return newSearchParams.toString();
+    },
+    [searchParams]
+  );
+
   return (
     <Table>
-      <TableCaption>{data?.items.length === 0 && 'Не найдено'}</TableCaption>
+      <TableCaption>{data?.items.length === 0 && 'Не найдено'}
+      {data && data?.total >= Number(perPage) && (
+          <Pagination
+            createQueryString={createQueryString}
+            pageCount={data?.total}
+            page={page}
+            perPage={perPage}
+          />
+        )}
+      </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Имя</TableHead>
